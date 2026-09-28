@@ -212,7 +212,7 @@
             width: 100%;
         }
 
-        /* Galeria Secreta */
+        /* Galerias de Fotos */
         .gallery-section {
             display: none;
             margin-top: 30px;
@@ -244,7 +244,7 @@
             transform: scale(1.03);
         }
 
-        /* Modal para Expansão da Imagem (Lightbox) */
+        /* Modal de Expansão da Imagem */
         .image-modal {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -306,16 +306,16 @@
                 <span class="verified-badge">✓</span>
             </div>
             <h1>Presentes para Bruno Dias 🎁</h1>
-            <p>Apoie as lives e desbloqueie a galeria exclusiva de fotos!</p>
+            <p>Apoie as lives e desbloqueie galerias exclusivas de fotos!</p>
         </div>
 
-        <!-- Opções de Mimo Atualizadas -->
+        <!-- Opções de Mimo -->
         <div class="grid-gifts">
             <div class="gift-card">
                 <div>
                     <div class="gift-icon">🌱</div>
                     <div class="gift-title">Acesso Básico</div>
-                    <div class="gift-desc">Apoio inicial + liberação completa da galeria de fotos!</div>
+                    <div class="gift-desc">Apoio inicial + acesso à Galeria Bási!</div>
                 </div>
                 <div class="gift-footer">
                     <span class="gift-price">R$ 2,00</span>
@@ -327,7 +327,7 @@
                 <div>
                     <div class="gift-icon">🥉</div>
                     <div class="gift-title">Nível Bronze</div>
-                    <div class="gift-desc">Fortaleça a transmissão e garanta acesso imediato às fotos!</div>
+                    <div class="gift-desc">Fortaleça a live + acesso à Galeria Bronze!</div>
                 </div>
                 <div class="gift-footer">
                     <span class="gift-price">R$ 5,00</span>
@@ -339,7 +339,7 @@
                 <div>
                     <div class="gift-icon">🥈</div>
                     <div class="gift-title">Nível Prata</div>
-                    <div class="gift-desc">Apoio de destaque para o canal com acesso total à galeria!</div>
+                    <div class="gift-desc">Apoio de destaque + acesso à Galeria Prata!</div>
                 </div>
                 <div class="gift-footer">
                     <span class="gift-price">R$ 10,00</span>
@@ -351,7 +351,7 @@
                 <div>
                     <div class="gift-icon">🥇</div>
                     <div class="gift-title">VIP Premium</div>
-                    <div class="gift-desc">Maior nível de apoio da live com acesso prioritário e galeria!</div>
+                    <div class="gift-desc">Apoio máximo + acesso à Galeria VIP Exclusiva!</div>
                 </div>
                 <div class="gift-footer">
                     <span class="gift-price">R$ 20,00</span>
@@ -366,12 +366,12 @@
                 <button class="close-btn" onclick="fecharPix()">✕</button>
                 <h2>Apoiar com <br><span id="valorMimo" style="color:#a855f7;"></span> 💸</h2>
                 <p style="font-size: 13px; color: var(--text-muted); margin-top: 8px;">
-                    Faça o Pix para a chave abaixo. Digite a senha para liberar as fotos:
+                    Faça o Pix para a chave abaixo e digite o nome do seu plano para liberar as fotos:
                 </p>
                 
                 <div class="pix-box">36064ea4-258f-4328-a099-2bff7f4035dd</div>
                 
-                <input type="password" id="campoSenha" class="password-input" placeholder="Digite a senha de acesso">
+                <input type="text" id="campoSenha" class="password-input" placeholder="Digite o nome do plano (ex: basico)">
                 
                 <button class="btn-confirm" onclick="verificarSenha()">
                     🔓 Desbloquear Galeria
@@ -379,24 +379,57 @@
             </div>
         </div>
 
-        <!-- Galeria de Fotos Oculta -->
-        <div class="gallery-section" id="galeriaOculta">
-            <h2>🎉 Galeria Exclusiva Desbloqueada!</h2>
+        <!-- GALERIA 1: BÁSICA (Acesso com: basico) -->
+        <div class="gallery-section" id="galeriaBasica">
+            <h2>🌱 Galeria Bási Desbloqueada!</h2>
             <p style="color: var(--text-muted); font-size: 14px; margin-top: 4px;">
                 Clique em qualquer foto para ampliar:
             </p>
-            
             <div class="gallery-grid">
-                <img src="foto1.jpg" alt="Foto Bruno 1" class="gallery-img" onclick="expandirImagem(this.src)">
-                <img src="foto2.jpg" alt="Foto Bruno 2" class="gallery-img" onclick="expandirImagem(this.src)">
-                <img src="foto3.jpg" alt="Foto Bruno 3" class="gallery-img" onclick="expandirImagem(this.src)">
-                <img src="foto4.jpg" alt="Foto Bruno 4" class="gallery-img" onclick="expandirImagem(this.src)">
+                <img src="basico1.jpg" alt="Foto Bási 1" class="gallery-img" onclick="expandirImagem(this.src)">
+                <img src="basico2.jpg" alt="Foto Bási 2" class="gallery-img" onclick="expandirImagem(this.src)">
             </div>
         </div>
 
-        <!-- Pop-up para Expandir Imagem -->
+        <!-- GALERIA 2: BRONZE (Acesso com: bronze) -->
+        <div class="gallery-section" id="galeriaBronze">
+            <h2>🥉 Galeria Bronze Desbloqueada!</h2>
+            <p style="color: var(--text-muted); font-size: 14px; margin-top: 4px;">
+                Clique em qualquer foto para ampliar:
+            </p>
+            <div class="gallery-grid">
+                <img src="bronze1.jpg" alt="Foto Bronze 1" class="gallery-img" onclick="expandirImagem(this.src)">
+                <img src="bronze2.jpg" alt="Foto Bronze 2" class="gallery-img" onclick="expandirImagem(this.src)">
+            </div>
+        </div>
+
+        <!-- GALERIA 3: PRATA (Acesso com: prata) -->
+        <div class="gallery-section" id="galeriaPrata">
+            <h2>🥈 Galeria Prata Desbloqueada!</h2>
+            <p style="color: var(--text-muted); font-size: 14px; margin-top: 4px;">
+                Clique em qualquer foto para ampliar:
+            </p>
+            <div class="gallery-grid">
+                <img src="prata1.jpg" alt="Foto Prata 1" class="gallery-img" onclick="expandirImagem(this.src)">
+                <img src="prata2.jpg" alt="Foto Prata 2" class="gallery-img" onclick="expandirImagem(this.src)">
+            </div>
+        </div>
+
+        <!-- GALERIA 4: VIP PREMIUM (Acesso com: vip) -->
+        <div class="gallery-section" id="galeriaVip">
+            <h2>🥇 Galeria VIP Premium Desbloqueada!</h2>
+            <p style="color: var(--text-muted); font-size: 14px; margin-top: 4px;">
+                Clique em qualquer foto para ampliar:
+            </p>
+            <div class="gallery-grid">
+                <img src="vip1.jpg" alt="Foto VIP 1" class="gallery-img" onclick="expandirImagem(this.src)">
+                <img src="vip2.jpg" alt="Foto VIP 2" class="gallery-img" onclick="expandirImagem(this.src)">
+            </div>
+        </div>
+
+        <!-- Modal para Expandir Imagem -->
         <div class="image-modal" id="modalImagem" onclick="fecharImagem()">
-            <img id="imagemExpandida" src="" alt="Foto em Tamanho Maior">
+            <img id="imagemExpandida" src="" alt="Foto Ampliada">
         </div>
 
         <!-- Rodapé -->
@@ -421,17 +454,37 @@
             document.getElementById('modalPix').style.display = 'none';
         }
 
-        function verificarSenha() {
-            const senhaInput = document.getElementById('campoSenha').value;
-            const senhaCorreta = "0697"; 
+        function esconderTodasGalerias() {
+            document.getElementById('galeriaBasica').style.display = 'none';
+            document.getElementById('galeriaBronze').style.display = 'none';
+            document.getElementById('galeriaPrata').style.display = 'none';
+            document.getElementById('galeriaVip').style.display = 'none';
+        }
 
-            if (senhaInput.trim() === senhaCorreta) {
+        function verificarSenha() {
+            // Converte o texto digitado para letras minúsculas e remove espaços
+            const entrada = document.getElementById('campoSenha').value.trim().toLowerCase();
+            esconderTodasGalerias();
+
+            let galeriaParaExibir = null;
+
+            if (entrada === "basico" || entrada === "básico") {
+                galeriaParaExibir = document.getElementById('galeriaBasica');
+            } else if (entrada === "bronze") {
+                galeriaParaExibir = document.getElementById('galeriaBronze');
+            } else if (entrada === "prata") {
+                galeriaParaExibir = document.getElementById('galeriaPrata');
+            } else if (entrada === "vip") {
+                galeriaParaExibir = document.getElementById('galeriaVip');
+            }
+
+            if (galeriaParaExibir) {
                 fecharPix();
-                const galeria = document.getElementById('galeriaOculta');
-                galeria.style.display = 'block';
-                galeria.scrollIntoView({ behavior: 'smooth' });
+                galeriaParaExibir.style.display = 'block';
+                galeriaParaExibir.scrollIntoView({ behavior: 'smooth' });
+                document.getElementById('campoSenha').value = '';
             } else {
-                alert('Senha incorreta! Digite a senha fornecida para acessar a galeria.');
+                alert('Nome do plano incorreto! Digite: basico, bronze, prata ou vip.');
             }
         }
 
