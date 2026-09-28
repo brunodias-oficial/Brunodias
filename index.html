@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mimos - Bruno Dias</title>
+    <title>Presentes para Bruno Dias</title>
     <style>
         * {
             margin: 0;
@@ -71,27 +71,18 @@
             margin-bottom: 25px;
         }
 
-        /* Grid de 4 Quadradinhos */
-        .support-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
-            margin-bottom: 20px;
-        }
-
+        /* Cards de Apoio */
         .support-card {
             background: #1e293b;
             border: 1px solid #334155;
             border-radius: 12px;
-            padding: 18px 12px;
+            padding: 18px;
+            margin-bottom: 15px;
             display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: space-between;
-            text-align: center;
             transition: all 0.2s ease;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-            min-height: 160px;
         }
 
         .support-card:hover {
@@ -99,8 +90,12 @@
             transform: translateY(-2px);
         }
 
+        .card-info {
+            text-align: left;
+        }
+
         .card-title {
-            font-size: 0.95rem;
+            font-size: 1rem;
             font-weight: 600;
             color: #f1f5f9;
             margin-bottom: 4px;
@@ -110,22 +105,20 @@
             font-size: 0.85rem;
             color: #38bdf8;
             font-weight: 500;
-            margin-bottom: 12px;
         }
 
         .btn-support {
             background: linear-gradient(135deg, #2563eb, #1d4ed8);
             color: white;
             border: none;
-            padding: 8px 14px;
+            padding: 10px 16px;
             border-radius: 8px;
             font-weight: 600;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             cursor: pointer;
             transition: opacity 0.2s;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            width: 100%;
         }
 
         .btn-support:hover {
@@ -188,29 +181,12 @@
             border: 1px dashed #475569;
             padding: 12px;
             border-radius: 8px;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
             font-family: monospace;
             font-size: 0.8rem;
             color: #38bdf8;
             word-break: break-all;
-        }
-
-        .btn-copy-pix {
-            background-color: #334155;
-            color: #f8fafc;
-            border: none;
-            width: 100%;
-            padding: 10px;
-            border-radius: 8px;
-            font-size: 0.85rem;
-            font-weight: 600;
             cursor: pointer;
-            margin-bottom: 15px;
-            transition: background 0.2s;
-        }
-
-        .btn-copy-pix:hover {
-            background-color: #475569;
         }
 
         .instructions {
@@ -267,7 +243,7 @@
             background-color: #16a34a;
         }
 
-        /* Galerias Desbloqueáveis */
+        /* Galerias */
         .gallery-section {
             display: none;
             margin-top: 25px;
@@ -302,7 +278,7 @@
             transform: scale(1.03);
         }
 
-        /* Lightbox */
+        /* Visualizador de Imagem Ampliada */
         .lightbox {
             display: none;
             position: fixed;
@@ -321,33 +297,6 @@
             max-width: 100%;
             max-height: 90vh;
             border-radius: 8px;
-        }
-
-        /* Notificação Toast */
-        #toast {
-            visibility: hidden;
-            min-width: 250px;
-            background-color: #1e293b;
-            color: #f8fafc;
-            text-align: center;
-            border-radius: 10px;
-            padding: 14px;
-            position: fixed;
-            z-index: 3000;
-            left: 50%;
-            bottom: 30px;
-            transform: translateX(-50%);
-            border: 1px solid #3b82f6;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
-            font-size: 0.9rem;
-            opacity: 0;
-            transition: opacity 0.3s, transform 0.3s;
-        }
-
-        #toast.show {
-            visibility: visible;
-            opacity: 1;
-            transform: translateX(-50%) translateY(0);
         }
 
         /* Rodapé */
@@ -371,42 +320,40 @@
             <img src="foto.jpg" alt="Bruno Dias" class="profile-pic" onerror="this.src='https://via.placeholder.com/110'">
             <div class="verified-badge">✓</div>
         </div>
-        <h1>Mimos</h1>
+        <h1>Bruno Dias</h1>
         <p class="handle">@brunodias_oficial</p>
 
-        <!-- Grid de 4 Quadradinhos -->
-        <div class="support-grid">
-            <div class="support-card">
-                <div>
-                    <div class="card-title">🌱 Acesso Básico</div>
-                    <div class="card-price">R$ 2,00 (2 fotos)</div>
-                </div>
-                <button class="btn-support" onclick="openModal('Acesso Básico', 'basico')">Mimar</button>
+        <!-- Cards -->
+        <div class="support-card">
+            <div class="card-info">
+                <div class="card-title">🌱 Acesso Básico</div>
+                <div class="card-price">R$ 2,00 (2 fotos)</div>
             </div>
+            <button class="btn-support" onclick="openModal('Acesso Básico', 'basico')">Mimar</button>
+        </div>
 
-            <div class="support-card">
-                <div>
-                    <div class="card-title">🥉 Nível Bronze</div>
-                    <div class="card-price">R$ 5,00 (4 fotos)</div>
-                </div>
-                <button class="btn-support" onclick="openModal('Nível Bronze', 'bronze')">Mimar</button>
+        <div class="support-card">
+            <div class="card-info">
+                <div class="card-title">🥉 Nível Bronze</div>
+                <div class="card-price">R$ 5,00 (4 fotos)</div>
             </div>
+            <button class="btn-support" onclick="openModal('Nível Bronze', 'bronze')">Mimar</button>
+        </div>
 
-            <div class="support-card">
-                <div>
-                    <div class="card-title">🥈 Nível Prata</div>
-                    <div class="card-price">R$ 10,00 (7 fotos)</div>
-                </div>
-                <button class="btn-support" onclick="openModal('Nível Prata', 'prata')">Mimar</button>
+        <div class="support-card">
+            <div class="card-info">
+                <div class="card-title">🥈 Nível Prata</div>
+                <div class="card-price">R$ 10,00 (7 fotos)</div>
             </div>
+            <button class="btn-support" onclick="openModal('Nível Prata', 'prata')">Mimar</button>
+        </div>
 
-            <div class="support-card">
-                <div>
-                    <div class="card-title">🥇 VIP Premium</div>
-                    <div class="card-price">R$ 20,00 (15 fotos)</div>
-                </div>
-                <button class="btn-support" onclick="openModal('VIP Premium', 'vip')">Mimar</button>
+        <div class="support-card">
+            <div class="card-info">
+                <div class="card-title">🥇 VIP Premium</div>
+                <div class="card-price">R$ 20,00 (15 fotos)</div>
             </div>
+            <button class="btn-support" onclick="openModal('VIP Premium', 'vip')">Mimar</button>
         </div>
 
         <!-- Galerias Desbloqueáveis -->
@@ -464,9 +411,7 @@
             <h2 id="modalTitle">Apoiar</h2>
             <p style="font-size: 0.85rem; color: #94a3b8; margin-bottom: 8px;">Faça o Pix para a chave abaixo:</p>
             
-            <div class="pix-key-box" id="pixKey">36064ea4-258f-4328-a099-2bff7f4035dd</div>
-            
-            <button class="btn-copy-pix" onclick="copyPix()">📋 Copiar Chave Pix</button>
+            <div class="pix-key-box" id="pixKey" onclick="copyPix()">36064ea4-258f-4328-a099-2bff7f4035dd</div>
             
             <div class="instructions">
                 📲 Envie o comprovante para o Telegram <a href="https://t.me/brdias97" target="_blank">@brdias97</a> para ter a senha de acesso.
@@ -482,20 +427,8 @@
         <img id="lightboxImg" src="">
     </div>
 
-    <!-- Elemento do Toast -->
-    <div id="toast">Notificação</div>
-
     <script>
         let currentTier = '';
-
-        window.onload = function() {
-            const tiers = ['basico', 'bronze', 'prata', 'vip'];
-            tiers.forEach(tier => {
-                if (localStorage.getItem('gallery_' + tier) === 'unlocked') {
-                    document.getElementById('gallery-' + tier).style.display = 'block';
-                }
-            });
-        };
 
         function openModal(tierName, tierKey) {
             currentTier = tierKey;
@@ -511,7 +444,7 @@
         function copyPix() {
             const key = document.getElementById('pixKey').innerText;
             navigator.clipboard.writeText(key);
-            showToast('📋 Chave Pix copiada com sucesso!');
+            alert('Chave Pix copiada!');
         }
 
         function unlockGallery() {
@@ -525,22 +458,12 @@
 
             if (pass === correctPass) {
                 document.getElementById('gallery-' + currentTier).style.display = 'block';
-                localStorage.setItem('gallery_' + currentTier, 'unlocked');
                 closeModal();
-                showToast('🎉 Galeria desbloqueada e salva com sucesso!');
+                alert('Galeria desbloqueada com sucesso! Aproveite!');
                 window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
             } else {
-                showToast('❌ Senha incorreta! Verifique com o Bruno no Telegram.');
+                alert('Senha incorreta! Verifique com o Bruno no Telegram.');
             }
-        }
-
-        function showToast(message) {
-            const toast = document.getElementById('toast');
-            toast.innerText = message;
-            toast.className = 'show';
-            setTimeout(function(){ 
-                toast.className = toast.className.replace('show', ''); 
-            }, 3500);
         }
 
         function openLightbox(src) {
