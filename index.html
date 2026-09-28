@@ -127,6 +127,33 @@
       background-color: var(--red-hover);
     }
 
+    /* Rodapé / Link do TikTok */
+    .footer {
+      margin-top: 40px;
+      text-align: center;
+    }
+
+    .tiktok-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #18181c;
+      border: 1px solid var(--card-border);
+      color: var(--text-main);
+      padding: 12px 20px;
+      border-radius: 25px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: all 0.2s ease;
+    }
+
+    .tiktok-link:hover {
+      border-color: #25f4ee;
+      box-shadow: -2px 0 10px rgba(37, 244, 238, 0.3), 2px 0 10px rgba(254, 44, 85, 0.3);
+      transform: translateY(-2px);
+    }
+
     /* JANELA POPUP (MODAL) */
     .modal-overlay {
       display: none;
@@ -335,6 +362,13 @@
       </div>
     </div>
 
+  </div>
+
+  <!-- RODAPÉ COM LINK DO TIKTOK -->
+  <div class="footer">
+    <a href="https://www.tiktok.com/@brunodias_oficial" target="_blank" rel="noopener noreferrer" class="tiktok-link">
+      🎵 Siga no TikTok: <b>@brunodias_oficial</b>
+    </a>
   </div>
 
   <!-- JANELA POPUP (MODAL) -->
