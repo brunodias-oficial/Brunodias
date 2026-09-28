@@ -23,7 +23,7 @@
 
         .container {
             width: 100%;
-            max-width: 700px;
+            max-width: 480px;
             text-align: center;
         }
 
@@ -39,8 +39,8 @@
             height: 110px;
             border-radius: 50%;
             object-fit: cover;
-            border: 3px solid #a855f7;
-            box-shadow: 0 4px 15px rgba(168, 85, 247, 0.3);
+            border: 3px solid #3b82f6;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
         }
 
         .verified-badge {
@@ -60,153 +60,69 @@
         }
 
         h1 {
-            font-size: 1.6rem;
+            font-size: 1.4rem;
             font-weight: 700;
             margin-bottom: 5px;
-            color: #f8fafc;
         }
 
-        .subtitle {
+        .handle {
             color: #94a3b8;
-            font-size: 0.95rem;
-            margin-bottom: 30px;
+            font-size: 0.9rem;
+            margin-bottom: 25px;
         }
 
-        /* Grid de Cards (2 colunas em telas maiores) */
-        .support-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 15px;
-            margin-bottom: 30px;
-        }
-
+        /* Cards de Apoio */
         .support-card {
             background: #1e293b;
             border: 1px solid #334155;
-            border-radius: 14px;
-            padding: 20px;
+            border-radius: 12px;
+            padding: 18px;
+            margin-bottom: 15px;
             display: flex;
-            flex-direction: column;
+            align-items: center;
             justify-content: space-between;
-            text-align: left;
             transition: all 0.2s ease;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
         }
 
         .support-card:hover {
-            border-color: #a855f7;
+            border-color: #3b82f6;
             transform: translateY(-2px);
         }
 
-        .card-top {
-            display: flex;
-            align-items: flex-start;
-            gap: 12px;
-            margin-bottom: 15px;
-        }
-
-        .card-icon {
-            font-size: 1.8rem;
-            background: #0f172a;
-            padding: 10px;
-            border-radius: 10px;
-            border: 1px solid #334155;
+        .card-info {
+            text-align: left;
         }
 
         .card-title {
-            font-size: 1.05rem;
+            font-size: 1rem;
             font-weight: 600;
             color: #f1f5f9;
             margin-bottom: 4px;
         }
 
-        .card-desc {
-            font-size: 0.82rem;
-            color: #94a3b8;
-            line-height: 1.3;
-        }
-
-        .card-bottom {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            border-top: 1px solid #334155;
-            padding-top: 12px;
-        }
-
         .card-price {
-            font-size: 1.1rem;
+            font-size: 0.85rem;
             color: #38bdf8;
-            font-weight: 700;
+            font-weight: 500;
         }
 
         .btn-support {
-            background: linear-gradient(135deg, #a855f7, #9333ea);
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
             color: white;
             border: none;
-            padding: 8px 16px;
+            padding: 10px 16px;
             border-radius: 8px;
             font-weight: 600;
             font-size: 0.85rem;
             cursor: pointer;
             transition: opacity 0.2s;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .btn-support:hover {
             opacity: 0.9;
-        }
-
-        /* Galerias Desbloqueadas */
-        .gallery-section {
-            display: none;
-            background: #1e293b;
-            border: 1px solid #334155;
-            border-radius: 14px;
-            padding: 20px;
-            margin-bottom: 20px;
-            text-align: left;
-        }
-
-        .gallery-header-title {
-            font-size: 1.05rem;
-            color: #f8fafc;
-            margin-bottom: 4px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .gallery-header-sub {
-            font-size: 0.8rem;
-            color: #94a3b8;
-            margin-bottom: 15px;
-        }
-
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 10px;
-        }
-
-        @media (max-width: 600px) {
-            .gallery-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        .gallery-item {
-            width: 100%;
-            height: 120px;
-            object-fit: cover;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: transform 0.2s;
-            border: 1px solid #334155;
-            background-color: #0f172a;
-        }
-
-        .gallery-item:hover {
-            transform: scale(1.03);
         }
 
         /* Modal do Pix */
@@ -263,7 +179,7 @@
         .pix-key-box {
             background-color: #0f172a;
             border: 1px dashed #475569;
-            padding: 10px;
+            padding: 12px;
             border-radius: 8px;
             margin-bottom: 10px;
             font-family: monospace;
@@ -272,7 +188,7 @@
             word-break: break-all;
         }
 
-        /* Botão Dedicado de Cópia (Melhoria 1) */
+        /* Botão Dedicado de Cópia */
         .btn-copy-pix {
             background-color: #334155;
             color: #f8fafc;
@@ -292,13 +208,13 @@
         }
 
         .instructions {
-            font-size: 0.82rem;
+            font-size: 0.85rem;
             color: #cbd5e1;
             background: #0f172a;
             padding: 10px;
             border-radius: 8px;
             margin-bottom: 15px;
-            border-left: 3px solid #a855f7;
+            border-left: 3px solid #3b82f6;
             text-align: left;
         }
 
@@ -326,7 +242,7 @@
 
         .password-input:focus {
             outline: none;
-            border-color: #a855f7;
+            border-color: #3b82f6;
         }
 
         .btn-unlock {
@@ -345,7 +261,42 @@
             background-color: #16a34a;
         }
 
-        /* Visualizador de Imagem Ampliada (Lightbox) */
+        /* Galerias */
+        .gallery-section {
+            display: none;
+            margin-top: 25px;
+            text-align: left;
+        }
+
+        .gallery-title {
+            font-size: 1.1rem;
+            margin-bottom: 12px;
+            color: #38bdf8;
+            border-bottom: 1px solid #334155;
+            padding-bottom: 5px;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+        }
+
+        .gallery-item {
+            width: 100%;
+            height: 110px;
+            object-fit: cover;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: transform 0.2s;
+            border: 1px solid #334155;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.03);
+        }
+
+        /* Visualizador de Imagem Ampliada */
         .lightbox {
             display: none;
             position: fixed;
@@ -366,7 +317,7 @@
             border-radius: 8px;
         }
 
-        /* Notificação Toast Moderna (Melhoria 2) */
+        /* Notificação Toast Moderna */
         #toast {
             visibility: hidden;
             min-width: 250px;
@@ -380,7 +331,7 @@
             left: 50%;
             bottom: 30px;
             transform: translateX(-50%);
-            border: 1px solid #a855f7;
+            border: 1px solid #3b82f6;
             box-shadow: 0 10px 25px rgba(0,0,0,0.4);
             font-size: 0.9rem;
             opacity: 0;
@@ -395,7 +346,7 @@
 
         /* Rodapé */
         footer {
-            margin-top: 20px;
+            margin-top: 35px;
             font-size: 0.8rem;
             color: #64748b;
         }
@@ -414,84 +365,45 @@
             <img src="foto.jpg" alt="Bruno Dias" class="profile-pic" onerror="this.src='https://via.placeholder.com/110'">
             <div class="verified-badge">✓</div>
         </div>
-        <h1>Presentes para Bruno Dias 🎁</h1>
-        <p class="subtitle">Apoie as lives e desbloqueie a galeria exclusiva de fotos!</p>
+        <h1>Bruno Dias</h1>
+        <p class="handle">@brunodias_oficial</p>
 
-        <!-- Grid de Cards de Apoio -->
-        <div class="support-grid">
-            <!-- Básico -->
-            <div class="support-card">
-                <div>
-                    <div class="card-top">
-                        <div class="card-icon">🍬</div>
-                        <div>
-                            <div class="card-title">Um Chiclete</div>
-                            <div class="card-desc">Apoio simbólico + acesso à galeria!</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-bottom">
-                    <div class="card-price">R$ 2,00</div>
-                    <button class="btn-support" onclick="openModal('Um Chiclete', 'basico')">Enviar Mimo</button>
-                </div>
+        <!-- Cards com os nomes originais -->
+        <div class="support-card">
+            <div class="card-info">
+                <div class="card-title">🌱 Acesso Básico</div>
+                <div class="card-price">R$ 2,00 (2 fotos)</div>
             </div>
+            <button class="btn-support" onclick="openModal('Acesso Básico', 'basico')">Mimar</button>
+        </div>
 
-            <!-- Bronze -->
-            <div class="support-card">
-                <div>
-                    <div class="card-top">
-                        <div class="card-icon">☕</div>
-                        <div>
-                            <div class="card-title">Um Café</div>
-                            <div class="card-desc">Ajude a manter a energia alta na transmissão!</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-bottom">
-                    <div class="card-price">R$ 5,00</div>
-                    <button class="btn-support" onclick="openModal('Um Café', 'bronze')">Enviar Mimo</button>
-                </div>
+        <div class="support-card">
+            <div class="card-info">
+                <div class="card-title">🥉 Nível Bronze</div>
+                <div class="card-price">R$ 5,00 (4 fotos)</div>
             </div>
+            <button class="btn-support" onclick="openModal('Nível Bronze', 'bronze')">Mimar</button>
+        </div>
 
-            <!-- Prata -->
-            <div class="support-card">
-                <div>
-                    <div class="card-top">
-                        <div class="card-icon">🥤</div>
-                        <div>
-                            <div class="card-title">Um Refrigerante</div>
-                            <div class="card-desc">Pague uma bebida para acompanhar a live!</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-bottom">
-                    <div class="card-price">R$ 10,00</div>
-                    <button class="btn-support" onclick="openModal('Um Refrigerante', 'prata')">Enviar Mimo</button>
-                </div>
+        <div class="support-card">
+            <div class="card-info">
+                <div class="card-title">🥈 Nível Prata</div>
+                <div class="card-price">R$ 10,00 (7 fotos)</div>
             </div>
+            <button class="btn-support" onclick="openModal('Nível Prata', 'prata')">Mimar</button>
+        </div>
 
-            <!-- VIP -->
-            <div class="support-card">
-                <div>
-                    <div class="card-top">
-                        <div class="card-icon">🍕</div>
-                        <div>
-                            <div class="card-title">Um Lanche</div>
-                            <div class="card-desc">Garanta o lanche do criador de conteúdo!</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-bottom">
-                    <div class="card-price">R$ 20,00</div>
-                    <button class="btn-support" onclick="openModal('Um Lanche', 'vip')">Enviar Mimo</button>
-                </div>
+        <div class="support-card">
+            <div class="card-info">
+                <div class="card-title">🥇 VIP Premium</div>
+                <div class="card-price">R$ 20,00 (15 fotos)</div>
             </div>
+            <button class="btn-support" onclick="openModal('VIP Premium', 'vip')">Mimar</button>
         </div>
 
         <!-- Galerias Desbloqueáveis -->
         <div id="gallery-basico" class="gallery-section">
-            <div class="gallery-header-title">🎉 Galeria Básico Desbloqueada!</div>
-            <div class="gallery-header-sub">Clique em qualquer foto para ampliar:</div>
+            <div class="gallery-title">🌱 Galeria Básico Desbloqueada</div>
             <div class="gallery-grid">
                 <img src="basico1.jpg" class="gallery-item" onclick="openLightbox(this.src)">
                 <img src="basico2.jpg" class="gallery-item" onclick="openLightbox(this.src)">
@@ -499,8 +411,7 @@
         </div>
 
         <div id="gallery-bronze" class="gallery-section">
-            <div class="gallery-header-title">🎉 Galeria Bronze Desbloqueada!</div>
-            <div class="gallery-header-sub">Clique em qualquer foto para ampliar:</div>
+            <div class="gallery-title">🥉 Galeria Bronze Desbloqueada</div>
             <div class="gallery-grid">
                 <img src="bronze1.jpg" class="gallery-item" onclick="openLightbox(this.src)">
                 <img src="bronze2.jpg" class="gallery-item" onclick="openLightbox(this.src)">
@@ -510,8 +421,7 @@
         </div>
 
         <div id="gallery-prata" class="gallery-section">
-            <div class="gallery-header-title">🎉 Galeria Prata Desbloqueada!</div>
-            <div class="gallery-header-sub">Clique em qualquer foto para ampliar:</div>
+            <div class="gallery-title">🥈 Galeria Prata Desbloqueada</div>
             <div class="gallery-grid">
                 <img src="prata1.jpg" class="gallery-item" onclick="openLightbox(this.src)">
                 <img src="prata2.jpg" class="gallery-item" onclick="openLightbox(this.src)">
@@ -524,8 +434,7 @@
         </div>
 
         <div id="gallery-vip" class="gallery-section">
-            <div class="gallery-header-title">🎉 Galeria VIP Premium Desbloqueada!</div>
-            <div class="gallery-header-sub">Clique em qualquer foto para ampliar:</div>
+            <div class="gallery-title">🥇 Galeria VIP Premium Desbloqueada</div>
             <div class="gallery-grid">
                 <script>
                     for(let i=1; i<=15; i++) {
@@ -549,7 +458,7 @@
             
             <div class="pix-key-box" id="pixKey">36064ea4-258f-4328-a099-2bff7f4035dd</div>
             
-            <!-- Botão Dedicado de Cópia (Melhoria 1) -->
+            <!-- Botão Dedicado de Cópia -->
             <button class="btn-copy-pix" onclick="copyPix()">📋 Copiar Chave Pix</button>
             
             <div class="instructions">
@@ -566,13 +475,13 @@
         <img id="lightboxImg" src="">
     </div>
 
-    <!-- Elemento do Toast (Melhoria 2) -->
+    <!-- Elemento do Toast -->
     <div id="toast">Notificação</div>
 
     <script>
         let currentTier = '';
 
-        // Memória de Acesso (Melhoria 3) - Restaura as galerias salvas ao carregar a página
+        // Memória de Acesso (Restaura as galerias salvas ao carregar a página)
         window.onload = function() {
             const tiers = ['basico', 'bronze', 'prata', 'vip'];
             tiers.forEach(tier => {
@@ -611,7 +520,7 @@
             if (pass === correctPass) {
                 document.getElementById('gallery-' + currentTier).style.display = 'block';
                 
-                // Salva na memória do navegador (Melhoria 3)
+                // Salva na memória do navegador
                 localStorage.setItem('gallery_' + currentTier, 'unlocked');
 
                 closeModal();
@@ -622,7 +531,7 @@
             }
         }
 
-        // Função do Toast (Melhoria 2)
+        // Função do Toast
         function showToast(message) {
             const toast = document.getElementById('toast');
             toast.innerText = message;
