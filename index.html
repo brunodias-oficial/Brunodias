@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Presentes para Bruno Dias</title>
-    <!-- Fonte Inter do Google Fonts para leitura amigável -->
+    <title>Presentes para Bruno Dias | Apoie a Live</title>
+    <!-- Fonte Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -18,7 +18,6 @@
             --btn-hover: linear-gradient(135deg, #f43f5e, #a855f7);
             --text-main: #f8fafc;
             --text-muted: #94a3b8;
-            --price-color: #38bdf8;
         }
 
         * {
@@ -44,7 +43,7 @@
             text-align: center;
         }
 
-        /* Profile Header */
+        /* Topo do Perfil */
         .profile-header {
             margin-bottom: 32px;
         }
@@ -52,22 +51,23 @@
         .avatar-container {
             position: relative;
             display: inline-block;
-            margin-bottom: 16px;
+            margin-bottom: 12px;
         }
 
         .avatar {
             width: 96px;
             height: 96px;
             border-radius: 50%;
-            object-fit: cover;
+            object-fit: cover; /* Impede a foto de achatar */
             border: 3px solid #9333ea;
             box-shadow: 0 0 20px rgba(147, 51, 234, 0.3);
+            display: block;
         }
 
         .verified-badge {
             position: absolute;
-            bottom: 4px;
-            right: 4px;
+            bottom: 2px;
+            right: 2px;
             background: #38bdf8;
             color: #000;
             border-radius: 50%;
@@ -84,18 +84,14 @@
             font-size: 26px;
             font-weight: 700;
             margin-bottom: 8px;
-            letter-spacing: -0.5px;
         }
 
         .profile-header p {
             color: var(--text-muted);
             font-size: 15px;
-            max-width: 480px;
-            margin: 0 auto;
-            line-height: 1.5;
         }
 
-        /* Grid de Cards */
+        /* Grid de Mimos */
         .grid-gifts {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -113,47 +109,24 @@
             flex-direction: column;
             justify-content: space-between;
             transition: all 0.25s ease;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
         }
 
         .gift-card:hover {
             transform: translateY(-4px);
             border-color: #6366f1;
-            box-shadow: 0 8px 24px rgba(99, 102, 241, 0.15);
         }
 
-        .gift-icon {
-            font-size: 28px;
-            margin-bottom: 12px;
-        }
-
-        .gift-title {
-            font-size: 18px;
-            font-weight: 600;
-            margin-bottom: 6px;
-            color: var(--text-main);
-        }
-
-        .gift-desc {
-            font-size: 13px;
-            color: var(--text-muted);
-            line-height: 1.4;
-            margin-bottom: 20px;
-            min-height: 36px;
-        }
+        .gift-icon { font-size: 28px; margin-bottom: 12px; }
+        .gift-title { font-size: 18px; font-weight: 600; margin-bottom: 6px; }
+        .gift-desc { font-size: 13px; color: var(--text-muted); margin-bottom: 20px; }
 
         .gift-footer {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 12px;
         }
 
-        .gift-price {
-            font-size: 20px;
-            font-weight: 700;
-            color: var(--text-main);
-        }
+        .gift-price { font-size: 20px; font-weight: 700; }
 
         .btn-mimo {
             background: var(--primary-accent);
@@ -165,21 +138,112 @@
             font-weight: 600;
             cursor: pointer;
             transition: all 0.2s ease;
-            text-decoration: none;
-            display: inline-block;
         }
 
         .btn-mimo:hover {
             background: var(--btn-hover);
-            box-shadow: 0 4px 12px rgba(225, 29, 72, 0.3);
         }
 
-        /* Rodapé de Redes e Segurança */
+        /* Modal / Janela Pix */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            padding: 28px;
+            border-radius: 20px;
+            max-width: 420px;
+            width: 90%;
+            text-align: center;
+            position: relative;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 12px;
+            right: 16px;
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .pix-box {
+            background: #121318;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px dashed var(--card-border);
+            margin: 14px 0;
+            font-family: monospace;
+            font-size: 13px;
+            word-break: break-all;
+            color: #38bdf8;
+        }
+
+        .password-input {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid var(--card-border);
+            background: #121318;
+            color: #fff;
+            margin-bottom: 12px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .btn-confirm {
+            background: #22c55e;
+            color: #000;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 10px;
+            font-weight: 700;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        /* Galeria Secreta */
+        .gallery-section {
+            display: none;
+            margin-top: 30px;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            padding: 24px;
+            border-radius: 20px;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .gallery-img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 12px;
+            border: 1px solid var(--card-border);
+        }
+
+        /* Rodapé */
         .footer-info {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 16px;
+            gap: 12px;
         }
 
         .social-link {
@@ -194,19 +258,16 @@
             text-decoration: none;
             font-size: 14px;
             font-weight: 500;
-            transition: background 0.2s;
-        }
-
-        .social-link:hover {
-            background: #2a2d3a;
         }
 
         .security-badge {
             font-size: 12px;
             color: #64748b;
-            display: flex;
-            align-items: center;
-            gap: 6px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
@@ -216,71 +277,103 @@
         <!-- Perfil -->
         <div class="profile-header">
             <div class="avatar-container">
-                <!-- Substitua pelo link da sua foto oficial -->
-                <img src="SUA_FOTO.jpg" alt="Bruno Dias" class="avatar">
+                <!-- IMPORTANTE: Altere 'perfil.jpg' para o nome exato da foto que subiu no GitHub -->
+                <img src="perfil.jpg" alt="Bruno Dias" class="avatar">
                 <span class="verified-badge">✓</span>
             </div>
             <h1>Presentes para Bruno Dias 🎁</h1>
-            <p>Apoie as lives e a criação de conteúdo escolhendo uma contribuição abaixo!</p>
+            <p>Apoie as lives e desbloqueie a galeria exclusiva de fotos!</p>
         </div>
 
         <!-- Opções de Mimo -->
         <div class="grid-gifts">
-            <!-- Item 1 -->
             <div class="gift-card">
                 <div>
                     <div class="gift-icon">🍬</div>
                     <div class="gift-title">Um Chiclete</div>
-                    <div class="gift-desc">Aquela força simbólica para dar aquele apoio na live!</div>
+                    <div class="gift-desc">Apoio simbólico + acesso à galeria!</div>
                 </div>
                 <div class="gift-footer">
                     <span class="gift-price">R$ 2,00</span>
-                    <a href="#" class="btn-mimo">Enviar Mimo</a>
+                    <button class="btn-mimo" onclick="abrirPix('R$ 2,00')">Enviar Mimo</button>
                 </div>
             </div>
 
-            <!-- Item 2 -->
             <div class="gift-card">
                 <div>
                     <div class="gift-icon">☕</div>
                     <div class="gift-title">Um Café</div>
-                    <div class="gift-desc">Ajude a manter a energia alta durante a transmissão!</div>
+                    <div class="gift-desc">Ajude a manter a energia alta na transmissão!</div>
                 </div>
                 <div class="gift-footer">
                     <span class="gift-price">R$ 5,00</span>
-                    <a href="#" class="btn-mimo">Enviar Mimo</a>
+                    <button class="btn-mimo" onclick="abrirPix('R$ 5,00')">Enviar Mimo</button>
                 </div>
             </div>
 
-            <!-- Item 3 -->
             <div class="gift-card">
                 <div>
                     <div class="gift-icon">🥤</div>
                     <div class="gift-title">Um Refrigerante</div>
-                    <div class="gift-desc">Pague uma bebida gelada para acompanhar o conteúdo!</div>
+                    <div class="gift-desc">Pague uma bebida para acompanhar a live!</div>
                 </div>
                 <div class="gift-footer">
                     <span class="gift-price">R$ 10,00</span>
-                    <a href="#" class="btn-mimo">Enviar Mimo</a>
+                    <button class="btn-mimo" onclick="abrirPix('R$ 10,00')">Enviar Mimo</button>
                 </div>
             </div>
 
-            <!-- Item 4 -->
             <div class="gift-card">
                 <div>
                     <div class="gift-icon">🍕</div>
                     <div class="gift-title">Um Lanche</div>
-                    <div class="gift-desc">Fortaleça o canal garantindo o lanche do criador!</div>
+                    <div class="gift-desc">Ganta o lanche do criador de conteúdo!</div>
                 </div>
                 <div class="gift-footer">
                     <span class="gift-price">R$ 20,00</span>
-                    <a href="#" class="btn-mimo">Enviar Mimo</a>
+                    <button class="btn-mimo" onclick="abrirPix('R$ 20,00')">Enviar Mimo</button>
                 </div>
             </div>
         </div>
 
+        <!-- Janela do Pix -->
+        <div class="modal-overlay" id="modalPix">
+            <div class="modal-content">
+                <button class="close-btn" onclick="fecharPix()">✕</button>
+                <h2>Apoiar com <span id="valorMimo"></span> 💸</h2>
+                <p style="font-size: 13px; color: var(--text-muted); margin-top: 8px;">
+                    Faça o Pix para a chave abaixo. Envie o comprovante ou digite a senha recebida na live para liberar as fotos:
+                </p>
+                
+                <!-- COLOQUE SUA CHAVE PIX REAL AQUI -->
+                <div class="pix-box">suachavepix@email.com</div>
+                
+                <input type="password" id="campoSenha" class="password-input" placeholder="Digite a senha de acesso">
+                
+                <button class="btn-confirm" onclick="verificarSenha()">
+                    🔓 Desbloquear Galeria
+                </button>
+            </div>
+        </div>
+
+        <!-- Galeria de Fotos (Desbloqueada com Senha) -->
+        <div class="gallery-section" id="galeriaOculta">
+            <h2>🎉 Galeria Exclusiva Desbloqueada!</h2>
+            <p style="color: var(--text-muted); font-size: 14px; margin-top: 4px;">
+                Muito obrigado pelo apoio! Aqui estão as fotos:
+            </p>
+            
+            <div class="gallery-grid">
+                <!-- Certifique-se de que enviou foto1.jpg, foto2.jpg, etc. para o repositório -->
+                <img src="foto1.jpg" alt="Foto Bruno 1" class="gallery-img">
+                <img src="foto2.jpg" alt="Foto Bruno 2" class="gallery-img">
+                <img src="foto3.jpg" alt="Foto Bruno 3" class="gallery-img">
+                <img src="foto4.jpg" alt="Foto Bruno 4" class="gallery-img">
+            </div>
+        </div>
+
         <!-- Rodapé -->
-        <div class="footer-info">
+        <div class="footer-info" style="margin-top: 30px;">
             <a href="https://tiktok.com/@brunodias_oficial" target="_blank" class="social-link">
                 🎵 Siga no TikTok: <strong>@brunodias_oficial</strong>
             </a>
@@ -291,5 +384,30 @@
         </div>
     </div>
 
+    <script>
+        function abrirPix(valor) {
+            document.getElementById('valorMimo').innerText = valor;
+            document.getElementById('modalPix').style.display = 'flex';
+        }
+
+        function fecharPix() {
+            document.getElementById('modalPix').style.display = 'none';
+        }
+
+        function verificarSenha() {
+            const senhaInput = document.getElementById('campoSenha').value;
+            // DEFINA A SUA SENHA AQUI (Exemplo: BRUNO2026)
+            const senhaCorreta = "BRUNO2026"; 
+
+            if (senhaInput.toUpperCase() === senhaCorreta) {
+                fecharPix();
+                const galeria = document.getElementById('galeriaOculta');
+                galeria.style.display = 'block';
+                galeria.scrollIntoView({ behavior: 'smooth' });
+            } else {
+                alert('Senha incorreta! Envie o comprovante na live para receber a senha de acesso.');
+            }
+        }
+    </script>
 </body>
 </html>
