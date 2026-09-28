@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Presentes para Bruno Dias</title>
+    <title>Mimos - Bruno Dias</title>
     <style>
         * {
             margin: 0;
@@ -13,34 +13,35 @@
         }
 
         body {
-            background-color: #0f172a;
+            background-color: #0b0f19;
             color: #f8fafc;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
+            align-items: center;
             min-height: 100vh;
-            padding: 20px;
+            padding: 40px 20px;
         }
 
         .container {
             width: 100%;
-            max-width: 480px;
+            max-width: 900px;
             text-align: center;
         }
 
         /* Perfil */
         .profile-container {
             position: relative;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             display: inline-block;
         }
 
         .profile-pic {
-            width: 110px;
-            height: 110px;
+            width: 120px;
+            height: 120px;
             border-radius: 50%;
             object-fit: cover;
-            border: 3px solid #3b82f6;
-            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+            border: 3px solid #8b5cf6;
+            box-shadow: 0 0 20px rgba(139, 92, 246, 0.4);
         }
 
         .verified-badge {
@@ -50,79 +51,138 @@
             background-color: #3b82f6;
             color: white;
             border-radius: 50%;
-            width: 26px;
-            height: 26px;
+            width: 28px;
+            height: 28px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 14px;
-            border: 2px solid #0f172a;
+            border: 3px solid #0b0f19;
         }
 
         h1 {
-            font-size: 1.4rem;
+            font-size: 1.8rem;
             font-weight: 700;
-            margin-bottom: 5px;
+            margin-bottom: 8px;
+            color: #ffffff;
         }
 
-        .handle {
+        .subtitle {
             color: #94a3b8;
-            font-size: 0.9rem;
-            margin-bottom: 25px;
+            font-size: 0.95rem;
+            margin-bottom: 35px;
         }
 
-        /* Cards de Apoio */
-        .support-card {
-            background: #1e293b;
-            border: 1px solid #334155;
-            border-radius: 12px;
-            padding: 18px;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            transition: all 0.2s ease;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-        }
-
-        .support-card:hover {
-            border-color: #3b82f6;
-            transform: translateY(-2px);
-        }
-
-        .card-info {
+        /* Grid de Cards (2 colunas) */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-bottom: 30px;
             text-align: left;
         }
 
+        @media (max-width: 650px) {
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .support-card {
+            background: #131b2e;
+            border: 1px solid #1e293b;
+            border-radius: 16px;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+
+        .support-card:hover {
+            border-color: #8b5cf6;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px -5px rgba(139, 92, 246, 0.15);
+        }
+
+        .card-icon {
+            font-size: 1.8rem;
+            margin-bottom: 12px;
+        }
+
         .card-title {
-            font-size: 1rem;
-            font-weight: 600;
-            color: #f1f5f9;
-            margin-bottom: 4px;
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #f8fafc;
+            margin-bottom: 6px;
+        }
+
+        .card-desc {
+            font-size: 0.85rem;
+            color: #94a3b8;
+            margin-bottom: 20px;
+            line-height: 1.4;
+        }
+
+        .card-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
 
         .card-price {
-            font-size: 0.85rem;
-            color: #38bdf8;
-            font-weight: 500;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #ffffff;
         }
 
         .btn-support {
-            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            background: linear-gradient(135deg, #a855f7, #ec4899);
             color: white;
             border: none;
-            padding: 10px 16px;
-            border-radius: 8px;
+            padding: 10px 18px;
+            border-radius: 10px;
             font-weight: 600;
             font-size: 0.85rem;
             cursor: pointer;
-            transition: opacity 0.2s;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+            transition: opacity 0.2s, transform 0.2s;
+            box-shadow: 0 4px 12px rgba(236, 72, 153, 0.3);
         }
 
         .btn-support:hover {
             opacity: 0.9;
+            transform: scale(1.02);
+        }
+
+        /* Rodapé de Informações e Links */
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #131b2e;
+            border: 1px solid #1e293b;
+            padding: 10px 20px;
+            border-radius: 30px;
+            color: #cbd5e1;
+            text-decoration: none;
+            font-size: 0.9rem;
+            margin-bottom: 12px;
+            transition: border-color 0.2s;
+        }
+
+        .social-link:hover {
+            border-color: #3b82f6;
+        }
+
+        .security-badge {
+            font-size: 0.8rem;
+            color: #64748b;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
         }
 
         /* Modal do Pix */
@@ -133,7 +193,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(15, 23, 42, 0.85);
+            background-color: rgba(11, 15, 25, 0.85);
             backdrop-filter: blur(5px);
             justify-content: center;
             align-items: center;
@@ -142,15 +202,15 @@
         }
 
         .modal-content {
-            background-color: #1e293b;
-            border: 1px solid #334155;
-            padding: 25px;
-            border-radius: 16px;
+            background-color: #131b2e;
+            border: 1px solid #1e293b;
+            padding: 30px;
+            border-radius: 20px;
             width: 100%;
-            max-width: 400px;
+            max-width: 420px;
             text-align: center;
             position: relative;
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
             animation: modalFadeIn 0.3s ease;
         }
 
@@ -161,43 +221,61 @@
 
         .close-modal {
             position: absolute;
-            top: 15px;
-            right: 15px;
+            top: 18px;
+            right: 18px;
             background: none;
             border: none;
             color: #94a3b8;
-            font-size: 1.2rem;
+            font-size: 1.4rem;
             cursor: pointer;
         }
 
         .modal h2 {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             margin-bottom: 15px;
-            color: #f8fafc;
+            color: #ffffff;
         }
 
         .pix-key-box {
-            background-color: #0f172a;
-            border: 1px dashed #475569;
+            background-color: #0b0f19;
+            border: 1px dashed #334155;
             padding: 12px;
-            border-radius: 8px;
-            margin-bottom: 15px;
+            border-radius: 10px;
+            margin-bottom: 12px;
             font-family: monospace;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             color: #38bdf8;
             word-break: break-all;
+        }
+
+        .btn-copy-pix {
+            background-color: #1e293b;
+            color: #f8fafc;
+            border: none;
+            width: 100%;
+            padding: 12px;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            font-weight: 600;
             cursor: pointer;
+            margin-bottom: 18px;
+            transition: background 0.2s;
+        }
+
+        .btn-copy-pix:hover {
+            background-color: #334155;
         }
 
         .instructions {
             font-size: 0.85rem;
             color: #cbd5e1;
-            background: #0f172a;
-            padding: 10px;
-            border-radius: 8px;
-            margin-bottom: 15px;
-            border-left: 3px solid #3b82f6;
+            background: #0b0f19;
+            padding: 12px;
+            border-radius: 10px;
+            margin-bottom: 18px;
+            border-left: 3px solid #8b5cf6;
             text-align: left;
+            line-height: 1.4;
         }
 
         .instructions a {
@@ -213,18 +291,18 @@
         .password-input {
             width: 100%;
             padding: 12px;
-            border-radius: 8px;
-            border: 1px solid #475569;
-            background-color: #0f172a;
+            border-radius: 10px;
+            border: 1px solid #334155;
+            background-color: #0b0f19;
             color: white;
-            font-size: 0.95rem;
+            font-size: 1rem;
             margin-bottom: 12px;
             text-align: center;
         }
 
         .password-input:focus {
             outline: none;
-            border-color: #3b82f6;
+            border-color: #8b5cf6;
         }
 
         .btn-unlock {
@@ -233,8 +311,9 @@
             border: none;
             width: 100%;
             padding: 12px;
-            border-radius: 8px;
+            border-radius: 10px;
             font-weight: 600;
+            font-size: 0.95rem;
             cursor: pointer;
             transition: background 0.2s;
         }
@@ -243,42 +322,48 @@
             background-color: #16a34a;
         }
 
-        /* Galerias */
+        /* Galerias Desbloqueadas */
         .gallery-section {
             display: none;
-            margin-top: 25px;
+            margin-top: 40px;
             text-align: left;
+            background: #131b2e;
+            border: 1px solid #1e293b;
+            padding: 25px;
+            border-radius: 16px;
         }
 
         .gallery-title {
-            font-size: 1.1rem;
-            margin-bottom: 12px;
+            font-size: 1.2rem;
+            margin-bottom: 18px;
             color: #38bdf8;
-            border-bottom: 1px solid #334155;
-            padding-bottom: 5px;
+            border-bottom: 1px solid #1e293b;
+            padding-bottom: 8px;
+            font-weight: 600;
         }
 
         .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 8px;
+            grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+            gap: 12px;
         }
 
         .gallery-item {
             width: 100%;
             height: 110px;
             object-fit: cover;
-            border-radius: 6px;
+            border-radius: 8px;
             cursor: pointer;
-            transition: transform 0.2s;
+            transition: transform 0.2s, filter 0.2s;
             border: 1px solid #334155;
         }
 
         .gallery-item:hover {
-            transform: scale(1.03);
+            transform: scale(1.04);
+            filter: brightness(1.1);
         }
 
-        /* Visualizador de Imagem Ampliada */
+        /* Lightbox */
         .lightbox {
             display: none;
             position: fixed;
@@ -286,29 +371,45 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.9);
+            background: rgba(0, 0, 0, 0.92);
             justify-content: center;
             align-items: center;
             z-index: 2000;
-            padding: 15px;
+            padding: 20px;
         }
 
         .lightbox img {
             max-width: 100%;
             max-height: 90vh;
-            border-radius: 8px;
+            border-radius: 10px;
+            box-shadow: 0 0 30px rgba(0,0,0,0.8);
         }
 
-        /* Rodapé */
-        footer {
-            margin-top: 35px;
-            font-size: 0.8rem;
-            color: #64748b;
+        /* Toast Moderno */
+        #toast {
+            visibility: hidden;
+            min-width: 270px;
+            background-color: #131b2e;
+            color: #f8fafc;
+            text-align: center;
+            border-radius: 12px;
+            padding: 16px;
+            position: fixed;
+            z-index: 3000;
+            left: 50%;
+            bottom: 30px;
+            transform: translateX(-50%);
+            border: 1px solid #8b5cf6;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            font-size: 0.95rem;
+            opacity: 0;
+            transition: opacity 0.3s, transform 0.3s;
         }
 
-        footer a {
-            color: #94a3b8;
-            text-decoration: none;
+        #toast.show {
+            visibility: visible;
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
         }
     </style>
 </head>
@@ -317,74 +418,102 @@
     <div class="container">
         <!-- Perfil -->
         <div class="profile-container">
-            <img src="foto.jpg" alt="Bruno Dias" class="profile-pic" onerror="this.src='https://via.placeholder.com/110'">
+            <img src="foto.jpg" alt="Bruno Dias" class="profile-pic" onerror="this.src='https://via.placeholder.com/120'">
             <div class="verified-badge">✓</div>
         </div>
-        <h1>Bruno Dias</h1>
-        <p class="handle">@brunodias_oficial</p>
+        <h1>Presentes para Bruno Dias 🎁</h1>
+        <p class="subtitle">Apoie as lives e desbloqueie galerias exclusivas de fotos!</p>
 
-        <!-- Cards -->
-        <div class="support-card">
-            <div class="card-info">
-                <div class="card-title">🌱 Acesso Básico</div>
-                <div class="card-price">R$ 2,00 (2 fotos)</div>
+        <!-- Grid de Cards de Apoio -->
+        <div class="cards-grid">
+            <div class="support-card">
+                <div>
+                    <div class="card-icon">🌱</div>
+                    <div class="card-title">Acesso Básico</div>
+                    <div class="card-desc">Apoio inicial + acesso à Galeria Básico!</div>
+                </div>
+                <div class="card-footer">
+                    <div class="card-price">R$ 2,00</div>
+                    <button class="btn-support" onclick="openModal('Acesso Básico', 'basico')">Enviar Mimo</button>
+                </div>
             </div>
-            <button class="btn-support" onclick="openModal('Acesso Básico', 'basico')">Mimar</button>
+
+            <div class="support-card">
+                <div>
+                    <div class="card-icon">🥉</div>
+                    <div class="card-title">Nível Bronze</div>
+                    <div class="card-desc">Fortaleça a live + acesso à Galeria Bronze!</div>
+                </div>
+                <div class="card-footer">
+                    <div class="card-price">R$ 5,00</div>
+                    <button class="btn-support" onclick="openModal('Nível Bronze', 'bronze')">Enviar Mimo</button>
+                </div>
+            </div>
+
+            <div class="support-card">
+                <div>
+                    <div class="card-icon">🥈</div>
+                    <div class="card-title">Nível Prata</div>
+                    <div class="card-desc">Apoio de destaque + acesso à Galeria Prata!</div>
+                </div>
+                <div class="card-footer">
+                    <div class="card-price">R$ 10,00</div>
+                    <button class="btn-support" onclick="openModal('Nível Prata', 'prata')">Enviar Mimo</button>
+                </div>
+            </div>
+
+            <div class="support-card">
+                <div>
+                    <div class="card-icon">🥇</div>
+                    <div class="card-title">VIP Premium</div>
+                    <div class="card-desc">Apoio máximo + acesso à Galeria VIP Exclusiva!</div>
+                </div>
+                <div class="card-footer">
+                    <div class="card-price">R$ 20,00</div>
+                    <button class="btn-support" onclick="openModal('VIP Premium', 'vip')">Enviar Mimo</button>
+                </div>
+            </div>
         </div>
 
-        <div class="support-card">
-            <div class="card-info">
-                <div class="card-title">🥉 Nível Bronze</div>
-                <div class="card-price">R$ 5,00 (4 fotos)</div>
+        <!-- Links e Rodapé -->
+        <div>
+            <a href="https://www.tiktok.com/@brunodias_oficial" target="_blank" class="social-link">
+                🎵 Siga no TikTok: <strong>@brunodias_oficial</strong>
+            </a>
+            <div class="security-badge">
+                🔒 Pagamento 100% seguro via Pix
             </div>
-            <button class="btn-support" onclick="openModal('Nível Bronze', 'bronze')">Mimar</button>
-        </div>
-
-        <div class="support-card">
-            <div class="card-info">
-                <div class="card-title">🥈 Nível Prata</div>
-                <div class="card-price">R$ 10,00 (7 fotos)</div>
-            </div>
-            <button class="btn-support" onclick="openModal('Nível Prata', 'prata')">Mimar</button>
-        </div>
-
-        <div class="support-card">
-            <div class="card-info">
-                <div class="card-title">🥇 VIP Premium</div>
-                <div class="card-price">R$ 20,00 (15 fotos)</div>
-            </div>
-            <button class="btn-support" onclick="openModal('VIP Premium', 'vip')">Mimar</button>
         </div>
 
         <!-- Galerias Desbloqueáveis -->
         <div id="gallery-basico" class="gallery-section">
             <div class="gallery-title">🌱 Galeria Básico Desbloqueada</div>
             <div class="gallery-grid">
-                <img src="basico1.jpg" class="gallery-item" onclick="openLightbox(this.src)">
-                <img src="basico2.jpg" class="gallery-item" onclick="openLightbox(this.src)">
+                <img src="basico1.jpg" class="gallery-item" onclick="openLightbox(this.src)" onerror="this.style.display='none'">
+                <img src="basico2.jpg" class="gallery-item" onclick="openLightbox(this.src)" onerror="this.style.display='none'">
             </div>
         </div>
 
         <div id="gallery-bronze" class="gallery-section">
             <div class="gallery-title">🥉 Galeria Bronze Desbloqueada</div>
             <div class="gallery-grid">
-                <img src="bronze1.jpg" class="gallery-item" onclick="openLightbox(this.src)">
-                <img src="bronze2.jpg" class="gallery-item" onclick="openLightbox(this.src)">
-                <img src="bronze3.jpg" class="gallery-item" onclick="openLightbox(this.src)">
-                <img src="bronze4.jpg" class="gallery-item" onclick="openLightbox(this.src)">
+                <img src="bronze1.jpg" class="gallery-item" onclick="openLightbox(this.src)" onerror="this.style.display='none'">
+                <img src="bronze2.jpg" class="gallery-item" onclick="openLightbox(this.src)" onerror="this.style.display='none'">
+                <img src="bronze3.jpg" class="gallery-item" onclick="openLightbox(this.src)" onerror="this.style.display='none'">
+                <img src="bronze4.jpg" class="gallery-item" onclick="openLightbox(this.src)" onerror="this.style.display='none'">
             </div>
         </div>
 
         <div id="gallery-prata" class="gallery-section">
             <div class="gallery-title">🥈 Galeria Prata Desbloqueada</div>
             <div class="gallery-grid">
-                <img src="prata1.jpg" class="gallery-item" onclick="openLightbox(this.src)">
-                <img src="prata2.jpg" class="gallery-item" onclick="openLightbox(this.src)">
-                <img src="prata3.jpg" class="gallery-item" onclick="openLightbox(this.src)">
-                <img src="prata4.jpg" class="gallery-item" onclick="openLightbox(this.src)">
-                <img src="prata5.jpg" class="gallery-item" onclick="openLightbox(this.src)">
-                <img src="prata6.jpg" class="gallery-item" onclick="openLightbox(this.src)">
-                <img src="prata7.jpg" class="gallery-item" onclick="openLightbox(this.src)">
+                <img src="prata1.jpg" class="gallery-item" onclick="openLightbox(this.src)" onerror="this.style.display='none'">
+                <img src="prata2.jpg" class="gallery-item" onclick="openLightbox(this.src)" onerror="this.style.display='none'">
+                <img src="prata3.jpg" class="gallery-item" onclick="openLightbox(this.src)" onerror="this.style.display='none'">
+                <img src="prata4.jpg" class="gallery-item" onclick="openLightbox(this.src)" onerror="this.style.display='none'">
+                <img src="prata5.jpg" class="gallery-item" onclick="openLightbox(this.src)" onerror="this.style.display='none'">
+                <img src="prata6.jpg" class="gallery-item" onclick="openLightbox(this.src)" onerror="this.style.display='none'">
+                <img src="prata7.jpg" class="gallery-item" onclick="openLightbox(this.src)" onerror="this.style.display='none'">
             </div>
         </div>
 
@@ -398,10 +527,6 @@
                 </script>
             </div>
         </div>
-
-        <footer>
-            <p>Conectado com <a href="https://www.tiktok.com/@brunodias_oficial" target="_blank">TikTok</a></p>
-        </footer>
     </div>
 
     <!-- Modal Pix -->
@@ -411,10 +536,11 @@
             <h2 id="modalTitle">Apoiar</h2>
             <p style="font-size: 0.85rem; color: #94a3b8; margin-bottom: 8px;">Faça o Pix para a chave abaixo:</p>
             
-            <div class="pix-key-box" id="pixKey" onclick="copyPix()">36064ea4-258f-4328-a099-2bff7f4035dd</div>
+            <div class="pix-key-box" id="pixKey">36064ea4-258f-4328-a099-2bff7f4035dd</div>
+            <button class="btn-copy-pix" onclick="copyPix()">📋 Copiar Chave Pix</button>
             
             <div class="instructions">
-                📲 Envie o comprovante para o Telegram <a href="https://t.me/brdias97" target="_blank">@brdias97</a> para ter a senha de acesso.
+                📲 Envie o comprovante no Telegram <a href="https://t.me/brdias97" target="_blank">@brdias97</a> para receber sua senha de acesso.
             </div>
 
             <input type="password" id="passInput" class="password-input" placeholder="Digite a senha numérica">
@@ -427,8 +553,21 @@
         <img id="lightboxImg" src="">
     </div>
 
+    <!-- Toast Notification -->
+    <div id="toast">Notificação</div>
+
     <script>
         let currentTier = '';
+
+        // Restaura as galerias que já foram desbloqueadas anteriormente no navegador
+        window.onload = function() {
+            const tiers = ['basico', 'bronze', 'prata', 'vip'];
+            tiers.forEach(tier => {
+                if (localStorage.getItem('gallery_' + tier) === 'unlocked') {
+                    document.getElementById('gallery-' + tier).style.display = 'block';
+                }
+            });
+        };
 
         function openModal(tierName, tierKey) {
             currentTier = tierKey;
@@ -444,7 +583,7 @@
         function copyPix() {
             const key = document.getElementById('pixKey').innerText;
             navigator.clipboard.writeText(key);
-            alert('Chave Pix copiada!');
+            showToast('📋 Chave Pix copiada com sucesso!');
         }
 
         function unlockGallery() {
@@ -458,12 +597,22 @@
 
             if (pass === correctPass) {
                 document.getElementById('gallery-' + currentTier).style.display = 'block';
+                localStorage.setItem('gallery_' + currentTier, 'unlocked');
                 closeModal();
-                alert('Galeria desbloqueada com sucesso! Aproveite!');
+                showToast('🎉 Galeria desbloqueada com sucesso!');
                 window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
             } else {
-                alert('Senha incorreta! Verifique com o Bruno no Telegram.');
+                showToast('❌ Senha incorreta! Confirme com o Bruno no Telegram.');
             }
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.innerText = message;
+            toast.className = 'show';
+            setTimeout(function(){ 
+                toast.className = toast.className.replace('show', ''); 
+            }, 3500);
         }
 
         function openLightbox(src) {
