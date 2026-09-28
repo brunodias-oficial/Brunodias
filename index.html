@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Me envie um Mimo 🎁 | Bruno Dias</title>
+  <title>Presentes para Bruno Dias 🎁</title>
   <style>
     :root {
       --bg-color: #0a0a0c;
@@ -279,9 +279,9 @@
 <body>
 
   <div class="header">
-    <img src="foto.jpg" alt="Bruno Dias" class="profile-img" onerror="this.src='https://via.placeholder.com/100/141418/e50914?text=Bruno'">
-    <h1>Me Envie um Mimo 🎁</h1>
-    <p>Escolha uma opção abaixo para apoiar e enviar uma contribuição!</p>
+    <img src="https://github.com/brunodiasa50-oss.png" alt="Bruno Dias" class="profile-img" onerror="this.src='foto.jpg'">
+    <h1>Presentes para Bruno Dias 🎁</h1>
+    <p>Apoie as lives e o conteúdo no TikTok escolhendo uma contribuição abaixo!</p>
   </div>
 
   <!-- LISTA DE PRESENTES -->
@@ -291,11 +291,11 @@
       <div>
         <div class="card-icon">🍬</div>
         <div class="card-title">Um Chiclete</div>
-        <div class="card-desc">Aquela ajuda simbólica para dar uma força!</div>
+        <div class="card-desc">Aquela força simbólica para apoiar a live!</div>
       </div>
       <div>
         <div class="card-price">R$ 2,00</div>
-        <button class="btn-presentear" onclick="abrirModal('🍬 Um Chiclete', '2,00')">Presentear</button>
+        <button class="btn-presentear" onclick="abrirModal('🍬 Um Chiclete', '2,00')">Enviar Mimo</button>
       </div>
     </div>
 
@@ -303,11 +303,11 @@
       <div>
         <div class="card-icon">☕</div>
         <div class="card-title">Um Café</div>
-        <div class="card-desc">Ajude a manter a energia para gravar os vídeos!</div>
+        <div class="card-desc">Ajude a manter a energia alta na transmissão!</div>
       </div>
       <div>
         <div class="card-price">R$ 5,00</div>
-        <button class="btn-presentear" onclick="abrirModal('☕ Um Café', '5,00')">Presentear</button>
+        <button class="btn-presentear" onclick="abrirModal('☕ Um Café', '5,00')">Enviar Mimo</button>
       </div>
     </div>
 
@@ -315,11 +315,11 @@
       <div>
         <div class="card-icon">🥤</div>
         <div class="card-title">Um Refrigerante</div>
-        <div class="card-desc">Apoie o conteúdo com uma bebida gelada.</div>
+        <div class="card-desc">Pague uma bebida para acompanhar o conteúdo!</div>
       </div>
       <div>
         <div class="card-price">R$ 10,00</div>
-        <button class="btn-presentear" onclick="abrirModal('🥤 Um Refrigerante', '10,00')">Presentear</button>
+        <button class="btn-presentear" onclick="abrirModal('🥤 Um Refrigerante', '10,00')">Enviar Mimo</button>
       </div>
     </div>
 
@@ -327,11 +327,11 @@
       <div>
         <div class="card-icon">🍕</div>
         <div class="card-title">Um Lanche</div>
-        <div class="card-desc">Pague o lanche do criador de conteúdo!</div>
+        <div class="card-desc">Fortaleça o canal pagando o lanche do criador!</div>
       </div>
       <div>
         <div class="card-price">R$ 20,00</div>
-        <button class="btn-presentear" onclick="abrirModal('🍕 Um Lanche', '20,00')">Presentear</button>
+        <button class="btn-presentear" onclick="abrirModal('🍕 Um Lanche', '20,00')">Enviar Mimo</button>
       </div>
     </div>
 
@@ -340,7 +340,7 @@
   <!-- JANELA POPUP (MODAL) -->
   <div class="modal-overlay" id="modalOverlay">
     <div class="modal">
-      <div class="modal-title">Seu presente</div>
+      <div class="modal-title">Seu Apoio</div>
 
       <div class="item-summary">
         <span id="modalItemNome">Item</span>
@@ -353,13 +353,13 @@
       </div>
 
       <div class="form-group">
-        <label for="nomeConvidado">Seu nome</label>
-        <input type="text" id="nomeConvidado" placeholder="Como devemos te agradecer?">
+        <label for="nomeConvidado">Seu nome / User do TikTok</label>
+        <input type="text" id="nomeConvidado" placeholder="Como quer ser identificado?">
       </div>
 
       <div class="form-group">
-        <label for="recadoConvidado">Recado (opcional)</label>
-        <textarea id="recadoConvidado" rows="3" placeholder="Deixe uma mensagem..."></textarea>
+        <label for="recadoConvidado">Recado para a live (opcional)</label>
+        <textarea id="recadoConvidado" rows="3" placeholder="Deixe uma mensagem para eu ler em live..."></textarea>
       </div>
 
       <div class="pix-box">
@@ -369,7 +369,7 @@
 
       <div class="modal-buttons">
         <button class="btn-outline" onclick="copiarPix()">Copiar chave Pix</button>
-        <button class="btn-confirm" onclick="avisarNoivos()">Avisar no WhatsApp</button>
+        <button class="btn-confirm" onclick="avisarCriador()">Avisar no Telegram</button>
       </div>
 
       <button class="btn-back" onclick="fecharModal()">Voltar à lista</button>
@@ -378,7 +378,7 @@
 
   <script>
     const CHAVE_PIX = "36064ea4-258f-4328-a099-2bff7f4035dd"; 
-    const SEU_WHATSAPP = "5521983598885";
+    const SEU_TELEGRAM_USER = "brdias97"; 
 
     let itemAtual = "";
     let valorAtual = "";
@@ -405,25 +405,25 @@
       alert("Chave Pix copiada com sucesso!");
     }
 
-    function avisarNoivos() {
+    function avisarCriador() {
       const nome = document.getElementById('nomeConvidado').value.trim();
       const recado = document.getElementById('recadoConvidado').value.trim();
 
       if (!nome) {
-        alert("Por favor, informe o seu nome para sabermos quem enviou o presente!");
+        alert("Por favor, informe seu nome ou @ do TikTok!");
         return;
       }
 
-      let mensagem = `Olá! Acabei de enviar um presente:%0A%0A`;
-      mensagem += `🎁 *Presente:* ${itemAtual}%0A`;
-      mensagem += `💰 *Valor:* R$ ${valorAtual}%0A`;
-      mensagem += `👤 *De:* ${nome}%0A`;
+      let mensagem = `Olá! Enviei um mimo para o perfil / live:\n\n`;
+      mensagem += `🎁 *Mimo:* ${itemAtual}\n`;
+      mensagem += `💰 *Valor:* R$ ${valorAtual}\n`;
+      mensagem += `👤 *De:* ${nome}\n`;
 
       if (recado) {
-        mensagem += `💬 *Mensagem:* ${recado}%0A`;
+        mensagem += `💬 *Recado:* ${recado}\n`;
       }
 
-      window.open(`https://wa.me/${SEU_WHATSAPP}?text=${mensagem}`, '_blank');
+      window.open(`https://t.me/${SEU_TELEGRAM_USER}?text=${encodeURIComponent(mensagem)}`, '_blank');
     }
   </script>
 </body>
