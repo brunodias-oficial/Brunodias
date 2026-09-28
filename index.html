@@ -181,12 +181,30 @@
             border: 1px dashed #475569;
             padding: 12px;
             border-radius: 8px;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
             font-family: monospace;
             font-size: 0.8rem;
             color: #38bdf8;
             word-break: break-all;
+        }
+
+        /* Botão Dedicado de Cópia (Alteração 1) */
+        .btn-copy-pix {
+            background-color: #334155;
+            color: #f8fafc;
+            border: none;
+            width: 100%;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 600;
             cursor: pointer;
+            margin-bottom: 15px;
+            transition: background 0.2s;
+        }
+
+        .btn-copy-pix:hover {
+            background-color: #475569;
         }
 
         .instructions {
@@ -299,6 +317,33 @@
             border-radius: 8px;
         }
 
+        /* Notificação Toast Moderna (Alteração 2) */
+        #toast {
+            visibility: hidden;
+            min-width: 250px;
+            background-color: #1e293b;
+            color: #f8fafc;
+            text-align: center;
+            border-radius: 10px;
+            padding: 14px;
+            position: fixed;
+            z-index: 3000;
+            left: 50%;
+            bottom: 30px;
+            transform: translateX(-50%);
+            border: 1px solid #3b82f6;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+            font-size: 0.9rem;
+            opacity: 0;
+            transition: opacity 0.3s, transform 0.3s;
+        }
+
+        #toast.show {
+            visibility: visible;
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
         /* Rodapé */
         footer {
             margin-top: 35px;
@@ -317,7 +362,7 @@
     <div class="container">
         <!-- Perfil -->
         <div class="profile-container">
-            <img src="foto.jpg" alt="Bruno Dias" class="profile-container profile-pic" onerror="this.src='https://via.placeholder.com/110'">
+            <img src="foto.jpg" alt="Bruno Dias" class="profile-pic" onerror="this.src='https://via.placeholder.com/110'">
             <div class="verified-badge">✓</div>
         </div>
         <h1>Bruno Dias</h1>
@@ -411,7 +456,10 @@
             <h2 id="modalTitle">Apoiar</h2>
             <p style="font-size: 0.85rem; color: #94a3b8; margin-bottom: 8px;">Faça o Pix para a chave abaixo:</p>
             
-            <div class="pix-key-box" id="pixKey" onclick="copyPix()">36064ea4-258f-4328-a099-2bff7f4035dd</div>
+            <div class="pix-key-box" id="pixKey">36064ea4-258f-4328-a099-2bff7f4035dd</div>
+            
+            <!-- Botão Dedicado de Cópia (Alteração 1) -->
+            <button class="btn-copy-pix" onclick="copyPix()">📋 Copiar Chave Pix</button>
             
             <div class="instructions">
                 📲 Envie o comprovante para o Telegram <a href="https://t.me/brdias97" target="_blank">@brdias97</a> para ter a senha de acesso.
@@ -427,8 +475,21 @@
         <img id="lightboxImg" src="">
     </div>
 
+    <!-- Elemento do Toast (Alteração 2) -->
+    <div id="toast">Notificação</div>
+
     <script>
         let currentTier = '';
+
+        // Memória de Acesso (Alteração 3) - Restaura as galerias salvas ao carregar a página
+        window.onload = function() {
+            const tiers = ['basico', 'bronze', 'prata', 'vip'];
+            tiers.forEach(tier => {
+                if (localStorage.getItem('gallery_' + tier) === 'unlocked') {
+                    document.getElementById('gallery-' + tier).style.display = 'block';
+                }
+            });
+        };
 
         function openModal(tierName, tierKey) {
             currentTier = tierKey;
@@ -444,7 +505,7 @@
         function copyPix() {
             const key = document.getElementById('pixKey').innerText;
             navigator.clipboard.writeText(key);
-            alert('Chave Pix copiada!');
+            showToast('📋 Chave Pix copiada com sucesso!');
         }
 
         function unlockGallery() {
@@ -458,12 +519,26 @@
 
             if (pass === correctPass) {
                 document.getElementById('gallery-' + currentTier).style.display = 'block';
+                
+                // Salva na memória do navegador (Alteração 3)
+                localStorage.setItem('gallery_' + currentTier, 'unlocked');
+
                 closeModal();
-                alert('Galeria desbloqueada com sucesso! Aproveite!');
+                showToast('🎉 Galeria desbloqueada e salva com sucesso!');
                 window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
             } else {
-                alert('Senha incorreta! Verifique com o Bruno no Telegram.');
+                showToast('❌ Senha incorreta! Verifique com o Bruno no Telegram.');
             }
+        }
+
+        // Função do Toast (Alteração 2)
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.innerText = message;
+            toast.className = 'show';
+            setTimeout(function(){ 
+                toast.className = toast.className.replace('show', ''); 
+            }, 3500);
         }
 
         function openLightbox(src) {
