@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Envie um Presente 🎁</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #121212;
+      color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+      margin: 0;
+    }
+    .profile {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .card {
+      background-color: #1e1e1e;
+      border: 1px solid #333;
+      border-radius: 12px;
+      padding: 16px;
+      margin: 10px 0;
+      width: 100%;
+      max-width: 350px;
+      text-align: center;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+    }
+    .card h3 { 
+      margin: 0 0 8px 0; 
+      color: #ff0050; 
+    }
+    .card p { 
+      margin: 0 0 12px 0; 
+      font-size: 14px; 
+      color: #ccc; 
+    }
+    .btn {
+      background-color: #25d366;
+      color: #fff;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 20px;
+      font-weight: bold;
+      cursor: pointer;
+      width: 100%;
+      font-size: 15px;
+    }
+    .btn:active {
+      transform: scale(0.98);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="profile">
+    <h2>Me envie um Mimo! 🎁</h2>
+    <p>Escolha um presente abaixo e faça um Pix:</p>
+  </div>
+
+  <!-- Opção 1 -->
+  <div class="card">
+    <h3>☕ Um Café - R$ 5,00</h3>
+    <p>Ajude a manter a energia para gravar os vídeos!</p>
+    <button class="btn" onclick="copiarPix('36064ea4-258f-4328-a099-2bff7f4035dd')">Copiar Chave Pix</button>
+  </div>
+
+  <!-- Opção 2 -->
+  <div class="card">
+    <h3>🍕 Uma Pizza - R$ 30,00</h3>
+    <p>Pague o lanche do criador de conteúdo!</p>
+    <button class="btn" onclick="copiarPix('36064ea4-258f-4328-a099-2bff7f4035dd')">Copiar Chave Pix</button>
+  </div>
+
+  <!-- Opção 3 -->
+  <div class="card">
+    <h3>🚀 Apoiar o Canal - Qualquer Valor</h3>
+    <p>Sua ajuda faz toda a diferença para o canal crescer.</p>
+    <button class="btn" onclick="copiarPix('36064ea4-258f-4328-a099-2bff7f4035dd')">Copiar Chave Pix</button>
+  </div>
+
+  <script>
+    function copiarPix(chave) {
+      navigator.clipboard.writeText(chave);
+      alert('Chave Pix copiada com sucesso! Cole no aplicativo do seu banco.');
+    }
+  </script>
+
+</body>
+</html>
