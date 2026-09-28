@@ -58,7 +58,7 @@
             width: 96px;
             height: 96px;
             border-radius: 50%;
-            object-fit: cover; /* Impede a foto de achatar */
+            object-fit: cover; /* Garante que a foto não fique achatada */
             border: 3px solid #9333ea;
             box-shadow: 0 0 20px rgba(147, 51, 234, 0.3);
             display: block;
@@ -184,9 +184,10 @@
             border: 1px dashed var(--card-border);
             margin: 14px 0;
             font-family: monospace;
-            font-size: 13px;
+            font-size: 12px;
             word-break: break-all;
             color: #38bdf8;
+            user-select: all;
         }
 
         .password-input {
@@ -277,8 +278,7 @@
         <!-- Perfil -->
         <div class="profile-header">
             <div class="avatar-container">
-                <!-- IMPORTANTE: Altere 'perfil.jpg' para o nome exato da foto que subiu no GitHub -->
-                <img src="perfil.jpg" alt="Bruno Dias" class="avatar">
+                <img src="foto.jpg" alt="Bruno Dias" class="avatar">
                 <span class="verified-badge">✓</span>
             </div>
             <h1>Presentes para Bruno Dias 🎁</h1>
@@ -327,7 +327,7 @@
                 <div>
                     <div class="gift-icon">🍕</div>
                     <div class="gift-title">Um Lanche</div>
-                    <div class="gift-desc">Ganta o lanche do criador de conteúdo!</div>
+                    <div class="gift-desc">Garanta o lanche do criador de conteúdo!</div>
                 </div>
                 <div class="gift-footer">
                     <span class="gift-price">R$ 20,00</span>
@@ -342,11 +342,11 @@
                 <button class="close-btn" onclick="fecharPix()">✕</button>
                 <h2>Apoiar com <span id="valorMimo"></span> 💸</h2>
                 <p style="font-size: 13px; color: var(--text-muted); margin-top: 8px;">
-                    Faça o Pix para a chave abaixo. Envie o comprovante ou digite a senha recebida na live para liberar as fotos:
+                    Faça o Pix para a chave abaixo. Digite a senha para liberar as fotos:
                 </p>
                 
-                <!-- COLOQUE SUA CHAVE PIX REAL AQUI -->
-                <div class="pix-box">suachavepix@email.com</div>
+                <!-- Sua Chave Pix -->
+                <div class="pix-box">36064ea4-258f-4328-a099-2bff7f4035dd</div>
                 
                 <input type="password" id="campoSenha" class="password-input" placeholder="Digite a senha de acesso">
                 
@@ -364,7 +364,7 @@
             </p>
             
             <div class="gallery-grid">
-                <!-- Certifique-se de que enviou foto1.jpg, foto2.jpg, etc. para o repositório -->
+                <!-- Envie essas fotos para o repositório ou ajuste os nomes conforme necessário -->
                 <img src="foto1.jpg" alt="Foto Bruno 1" class="gallery-img">
                 <img src="foto2.jpg" alt="Foto Bruno 2" class="gallery-img">
                 <img src="foto3.jpg" alt="Foto Bruno 3" class="gallery-img">
@@ -396,16 +396,16 @@
 
         function verificarSenha() {
             const senhaInput = document.getElementById('campoSenha').value;
-            // DEFINA A SUA SENHA AQUI (Exemplo: BRUNO2026)
-            const senhaCorreta = "BRUNO2026"; 
+            // Sua senha configurada
+            const senhaCorreta = "0697"; 
 
-            if (senhaInput.toUpperCase() === senhaCorreta) {
+            if (senhaInput.trim() === senhaCorreta) {
                 fecharPix();
                 const galeria = document.getElementById('galeriaOculta');
                 galeria.style.display = 'block';
                 galeria.scrollIntoView({ behavior: 'smooth' });
             } else {
-                alert('Senha incorreta! Envie o comprovante na live para receber a senha de acesso.');
+                alert('Senha incorreta! Digite a senha fornecida para acessar a galeria.');
             }
         }
     </script>
