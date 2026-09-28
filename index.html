@@ -3,106 +3,131 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lista de Presentes de Casamento</title>
+  <title>Me envie um Mimo 🎁 | Bruno Dias</title>
   <style>
+    :root {
+      --bg-color: #0a0a0c;
+      --card-bg: #141418;
+      --card-border: #24242c;
+      --red-accent: #e50914;
+      --red-hover: #b80710;
+      --text-main: #ffffff;
+      --text-muted: #a0a0a8;
+    }
+
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     }
 
     body {
-      background-color: #f4f4f6;
-      color: #333;
-      padding: 30px 15px;
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      padding: 30px 15px 50px;
       display: flex;
       flex-direction: column;
       align-items: center;
+      min-height: 100vh;
     }
 
     .header {
       text-align: center;
-      max-width: 600px;
+      max-width: 500px;
       margin-bottom: 30px;
     }
 
+    .profile-img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--red-accent);
+      box-shadow: 0 0 20px rgba(229, 9, 20, 0.4);
+      margin-bottom: 12px;
+    }
+
     .header h1 {
-      font-family: Georgia, serif;
-      font-size: 2.2rem;
-      color: #2c2c2c;
-      margin-bottom: 10px;
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 6px;
     }
 
     .header p {
-      color: #666;
+      color: var(--text-muted);
       font-size: 0.95rem;
-      line-height: 1.5;
+      line-height: 1.4;
     }
 
-    /* Grid de Presentes */
+    /* Grid de Cards */
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 20px;
+      gap: 16px;
       width: 100%;
-      max-width: 900px;
+      max-width: 800px;
     }
 
     .card {
-      background: #ffffff;
-      border-radius: 12px;
+      background: var(--card-bg);
+      border-radius: 14px;
       padding: 20px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      border: 1px solid var(--card-border);
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      border: 1px solid #eaeaea;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+
+    .card:hover {
+      border-color: var(--red-accent);
+      transform: translateY(-2px);
     }
 
     .card-icon {
-      font-size: 2.5rem;
-      margin-bottom: 10px;
+      font-size: 2rem;
+      margin-bottom: 8px;
     }
 
     .card-title {
-      font-family: Georgia, serif;
-      font-size: 1.25rem;
-      color: #222;
-      margin-bottom: 6px;
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 4px;
     }
 
     .card-desc {
       font-size: 0.85rem;
-      color: #777;
+      color: var(--text-muted);
       margin-bottom: 15px;
       min-height: 36px;
     }
 
     .card-price {
-      font-size: 1.2rem;
-      font-weight: bold;
-      color: #333;
-      margin-bottom: 15px;
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--red-accent);
+      margin-bottom: 12px;
     }
 
     .btn-presentear {
-      background-color: #8b3a4a;
-      color: white;
+      background-color: var(--red-accent);
+      color: #ffffff;
       border: none;
       padding: 12px;
-      border-radius: 6px;
+      border-radius: 8px;
       font-weight: bold;
       cursor: pointer;
       width: 100%;
+      font-size: 0.95rem;
       transition: background 0.2s;
     }
 
     .btn-presentear:hover {
-      background-color: #722d3b;
+      background-color: var(--red-hover);
     }
 
-    /* POPUP / MODAL */
+    /* JANELA POPUP (MODAL) */
     .modal-overlay {
       display: none;
       position: fixed;
@@ -110,7 +135,8 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0, 0, 0, 0.5);
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(4px);
       justify-content: center;
       align-items: center;
       z-index: 1000;
@@ -118,38 +144,40 @@
     }
 
     .modal {
-      background: white;
-      border-radius: 12px;
+      background: #18181c;
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
       width: 100%;
-      max-width: 450px;
-      padding: 25px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      max-width: 420px;
+      padding: 24px;
+      color: var(--text-main);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
     }
 
     .modal-title {
-      font-family: Georgia, serif;
-      font-size: 1.4rem;
-      color: #333;
+      font-size: 1.3rem;
+      font-weight: 700;
       margin-bottom: 15px;
+      color: #ffffff;
+      border-bottom: 1px solid var(--card-border);
+      padding-bottom: 10px;
     }
 
-    .item-summary {
+    .item-summary, .total-summary {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding-bottom: 10px;
-      border-bottom: 1px solid #eee;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
       font-size: 0.95rem;
     }
 
     .total-summary {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
       font-weight: bold;
+      font-size: 1.1rem;
+      color: var(--red-accent);
       margin-bottom: 15px;
-      font-size: 1.05rem;
+      padding-top: 8px;
+      border-top: 1px dashed var(--card-border);
     }
 
     .form-group {
@@ -159,37 +187,42 @@
     .form-group label {
       display: block;
       font-size: 0.85rem;
-      font-weight: bold;
-      color: #555;
-      margin-bottom: 5px;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-bottom: 6px;
     }
 
     .form-group input, .form-group textarea {
       width: 100%;
-      padding: 10px;
-      border: 1px solid #ddd;
-      border-radius: 6px;
+      padding: 10px 12px;
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
       font-size: 0.9rem;
-      background-color: #fdfdfd;
+      background-color: #0f0f12;
+      color: #ffffff;
+    }
+
+    .form-group input:focus, .form-group textarea:focus {
+      outline: none;
+      border-color: var(--red-accent);
     }
 
     .pix-box {
-      border: 1px dashed #8b3a4a;
-      background-color: #fdf6f7;
-      border-radius: 8px;
+      border: 1px dashed var(--red-accent);
+      background-color: rgba(229, 9, 20, 0.08);
+      border-radius: 10px;
       padding: 12px;
       margin: 15px 0;
       font-size: 0.88rem;
-    }
-
-    .pix-box p {
-      margin-bottom: 4px;
+      text-align: center;
     }
 
     .pix-box .chave {
       font-weight: bold;
-      color: #333;
+      color: #ffffff;
       word-break: break-all;
+      display: block;
+      margin-top: 4px;
     }
 
     .modal-buttons {
@@ -200,42 +233,55 @@
 
     .btn-outline {
       flex: 1;
-      background: white;
-      border: 1px solid #333;
-      color: #333;
-      padding: 10px;
-      border-radius: 6px;
+      background: transparent;
+      border: 1px solid var(--card-border);
+      color: #ffffff;
+      padding: 12px;
+      border-radius: 8px;
       font-weight: bold;
       cursor: pointer;
+    }
+
+    .btn-outline:hover {
+      background: rgba(255, 255, 255, 0.05);
     }
 
     .btn-confirm {
       flex: 1;
-      background-color: #8b3a4a;
-      color: white;
+      background-color: var(--red-accent);
+      color: #ffffff;
       border: none;
-      padding: 10px;
-      border-radius: 6px;
+      padding: 12px;
+      border-radius: 8px;
       font-weight: bold;
       cursor: pointer;
     }
 
+    .btn-confirm:hover {
+      background-color: var(--red-hover);
+    }
+
     .btn-back {
       width: 100%;
-      background: white;
-      border: 1px solid #ccc;
-      color: #666;
-      padding: 10px;
-      border-radius: 6px;
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      padding: 8px;
       cursor: pointer;
+      font-size: 0.85rem;
+    }
+
+    .btn-back:hover {
+      color: #ffffff;
     }
   </style>
 </head>
 <body>
 
   <div class="header">
-    <h1>Lista de Presentes</h1>
-    <p>Ficamos muito felizes em compartilhar esse momento especial com você. Se desejar nos presenear, escolha um item abaixo e contribua com o valor via Pix.</p>
+    <img src="foto.jpg" alt="Bruno Dias" class="profile-img" onerror="this.src='https://via.placeholder.com/100/141418/e50914?text=Bruno'">
+    <h1>Me Envie um Mimo 🎁</h1>
+    <p>Escolha uma opção abaixo para apoiar e enviar uma contribuição!</p>
   </div>
 
   <!-- LISTA DE PRESENTES -->
@@ -243,49 +289,49 @@
 
     <div class="card">
       <div>
+        <div class="card-icon">🍬</div>
+        <div class="card-title">Um Chiclete</div>
+        <div class="card-desc">Aquela ajuda simbólica para dar uma força!</div>
+      </div>
+      <div>
+        <div class="card-price">R$ 2,00</div>
+        <button class="btn-presentear" onclick="abrirModal('🍬 Um Chiclete', '2,00')">Presentear</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div>
         <div class="card-icon">☕</div>
-        <div class="card-title">Café da Manhã</div>
-        <div class="card-desc">Para começar o dia com energia na lua de mel.</div>
+        <div class="card-title">Um Café</div>
+        <div class="card-desc">Ajude a manter a energia para gravar os vídeos!</div>
       </div>
       <div>
-        <div class="card-price">R$ 50,00</div>
-        <button class="btn-presentear" onclick="abrirModal('☕ Café da Manhã', '50,00')">Presentear</button>
-      </div>
-    </div>
-
-    <div class="card">
-      <div>
-        <div class="card-icon">🍽️</div>
-        <div class="card-title">Jantar Romântico</div>
-        <div class="card-desc">Um jantar especial a dois durante a viagem.</div>
-      </div>
-      <div>
-        <div class="card-price">R$ 150,00</div>
-        <button class="btn-presentear" onclick="abrirModal('🍽️ Jantar Romântico', '150,00')">Presentear</button>
+        <div class="card-price">R$ 5,00</div>
+        <button class="btn-presentear" onclick="abrirModal('☕ Um Café', '5,00')">Presentear</button>
       </div>
     </div>
 
     <div class="card">
       <div>
-        <div class="card-icon">⛵</div>
-        <div class="card-title">Passeio de Barco</div>
-        <div class="card-desc">Um dia de mar e sol para relaxar.</div>
+        <div class="card-icon">🥤</div>
+        <div class="card-title">Um Refrigerante</div>
+        <div class="card-desc">Apoie o conteúdo com uma bebida gelada.</div>
       </div>
       <div>
-        <div class="card-price">R$ 180,00</div>
-        <button class="btn-presentear" onclick="abrirModal('⛵ Passeio de Barco', '180,00')">Presentear</button>
+        <div class="card-price">R$ 10,00</div>
+        <button class="btn-presentear" onclick="abrirModal('🥤 Um Refrigerante', '10,00')">Presentear</button>
       </div>
     </div>
 
     <div class="card">
       <div>
-        <div class="card-icon">✈️</div>
-        <div class="card-title">Passagens Aéreas</div>
-        <div class="card-desc">Ajuda para as passagens da nossa viagem dos sonhos.</div>
+        <div class="card-icon">🍕</div>
+        <div class="card-title">Um Lanche</div>
+        <div class="card-desc">Pague o lanche do criador de conteúdo!</div>
       </div>
       <div>
-        <div class="card-price">R$ 500,00</div>
-        <button class="btn-presentear" onclick="abrirModal('✈️ Passagens Aéreas', '500,00')">Presentear</button>
+        <div class="card-price">R$ 20,00</div>
+        <button class="btn-presentear" onclick="abrirModal('🍕 Um Lanche', '20,00')">Presentear</button>
       </div>
     </div>
 
@@ -312,18 +358,18 @@
       </div>
 
       <div class="form-group">
-        <label for="recadoConvidado">Recado para os noivos (opcional)</label>
-        <textarea id="recadoConvidado" rows="3" placeholder="Deixe uma mensagem especial..."></textarea>
+        <label for="recadoConvidado">Recado (opcional)</label>
+        <textarea id="recadoConvidado" rows="3" placeholder="Deixe uma mensagem..."></textarea>
       </div>
 
       <div class="pix-box">
         <p>Faça o Pix no valor total de <b id="modalPixValor">R$ 0,00</b></p>
-        <p>Chave Pix: <span class="chave" id="chavePixTexto">21983598885</span></p>
+        <span class="chave" id="chavePixTexto">36064ea4-258f-4328-a099-2bff7f4035dd</span>
       </div>
 
       <div class="modal-buttons">
         <button class="btn-outline" onclick="copiarPix()">Copiar chave Pix</button>
-        <button class="btn-confirm" onclick="avisarNoivos()">Avisar os noivos</button>
+        <button class="btn-confirm" onclick="avisarNoivos()">Avisar no WhatsApp</button>
       </div>
 
       <button class="btn-back" onclick="fecharModal()">Voltar à lista</button>
@@ -331,9 +377,8 @@
   </div>
 
   <script>
-    // DEFINE A SUA CHAVE PIX E SEU NÚMERO DE TELEFONE AQUI:
-    const CHAVE_PIX = "21983598885"; 
-    const SEU_WHATSAPP = "5521983598885"; // DDD + Número sem traço/espaço
+    const CHAVE_PIX = "36064ea4-258f-4328-a099-2bff7f4035dd"; 
+    const SEU_WHATSAPP = "5521983598885";
 
     let itemAtual = "";
     let valorAtual = "";
@@ -365,11 +410,11 @@
       const recado = document.getElementById('recadoConvidado').value.trim();
 
       if (!nome) {
-        alert("Por favor, informe o seu nome para sabermos quem nos presenteou!");
+        alert("Por favor, informe o seu nome para sabermos quem enviou o presente!");
         return;
       }
 
-      let mensagem = `Olá! Acabei de enviar um presente para vocês:%0A%0A`;
+      let mensagem = `Olá! Acabei de enviar um presente:%0A%0A`;
       mensagem += `🎁 *Presente:* ${itemAtual}%0A`;
       mensagem += `💰 *Valor:* R$ ${valorAtual}%0A`;
       mensagem += `👤 *De:* ${nome}%0A`;
