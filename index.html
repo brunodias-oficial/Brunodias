@@ -315,7 +315,7 @@
                 <div>
                     <div class="gift-icon">🌱</div>
                     <div class="gift-title">Acesso Básico</div>
-                    <div class="gift-desc">Apoio inicial + acesso à Galeria Bási!</div>
+                    <div class="gift-desc">Apoio inicial + acesso à Galeria Básico!</div>
                 </div>
                 <div class="gift-footer">
                     <span class="gift-price">R$ 2,00</span>
@@ -487,7 +487,6 @@
 
             let galeriaParaExibir = null;
 
-            // Verificação das senhas solicitadas
             if (senhaInput === "0106") {
                 galeriaParaExibir = document.getElementById('galeriaBasica');
             } else if (senhaInput === "0607") {
@@ -500,8 +499,8 @@
 
             if (galeriaParaExibir) {
                 fecharPix();
-                galeriaParaExivir.style.display = 'block';
-                galeriaParaExivir.scrollIntoView({ behavior: 'smooth' });
+                galeriaParaExibir.style.display = 'block';
+                galeriaParaExibir.scrollIntoView({ behavior: 'smooth' });
                 document.getElementById('campoSenha').value = '';
             } else {
                 alert('Senha incorreta! Digite a senha correta do seu plano.');
