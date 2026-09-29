@@ -13,7 +13,7 @@
         }
 
         body {
-            background-color: #090d16;
+            background-color: #00b4d2; /* Azul piscina bem lindo no fundo */
             color: #ffffff;
             display: flex;
             justify-content: center;
@@ -24,14 +24,14 @@
         }
 
         .container {
-            background-color: #111c30;
+            background-color: #1d4ed8; /* Azul royal elegante na tela/caixa */
             width: 100%;
             max-width: 420px;
             padding: 35px 25px;
             border-radius: 20px;
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
             text-align: center;
-            border: 1px solid #1e293b;
+            border: 2px solid #92E8F1;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -64,7 +64,7 @@
             object-fit: cover;
             border: 3px solid #92E8F1;
             margin-bottom: 20px;
-            box-shadow: 0 4px 15px rgba(146, 232, 241, 0.3);
+            box-shadow: 0 4px 15px rgba(146, 232, 241, 0.4);
         }
 
         h1 {
@@ -84,7 +84,7 @@
         }
 
         .btn-value {
-            background-color: #1a2942;
+            background-color: #1e40af;
             color: #ffffff;
             border: 2px solid #92E8F1;
             padding: 14px;
@@ -99,9 +99,9 @@
 
         .btn-value:hover {
             background-color: #92E8F1;
-            color: #090d16;
+            color: #1d4ed8;
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(146, 232, 241, 0.3);
+            box-shadow: 0 4px 12px rgba(146, 232, 241, 0.4);
         }
 
         .btn-full {
@@ -109,7 +109,7 @@
         }
 
         .pix-box {
-            background-color: #0b1322;
+            background-color: #1e3a8a;
             width: 100%;
             padding: 16px;
             border-radius: 12px;
@@ -121,12 +121,12 @@
         }
 
         .pix-box:hover {
-            background-color: #132238;
+            background-color: #1e40af;
         }
 
         .pix-box p {
             font-size: 0.85rem;
-            color: #94a3b8;
+            color: #93c5fd;
             margin-bottom: 6px;
         }
 
@@ -138,14 +138,14 @@
         }
 
         .thanks-box {
-            background-color: #0b1322;
+            background-color: #1e3a8a;
             width: 100%;
             padding: 16px;
             border-radius: 12px;
             margin-bottom: 20px;
-            border: 1px solid #1e293b;
+            border: 1px solid #3b82f6;
             font-size: 0.95rem;
-            color: #e2e8f0;
+            color: #eff6ff;
             line-height: 1.5;
             font-style: italic;
             text-align: center;
@@ -153,7 +153,7 @@
 
         .btn-tiktok {
             background: linear-gradient(135deg, #92E8F1 0%, #38bdf8 100%);
-            color: #090d16;
+            color: #1d4ed8;
             font-weight: bold;
             padding: 14px;
             border-radius: 12px;
@@ -163,7 +163,7 @@
             margin-bottom: 12px;
             transition: opacity 0.2s, transform 0.2s;
             text-align: center;
-            box-shadow: 0 4px 15px rgba(146, 232, 241, 0.2);
+            box-shadow: 0 4px 15px rgba(146, 232, 241, 0.3);
         }
 
         .btn-tiktok:hover {
@@ -186,7 +186,7 @@
         }
 
         .btn-back:hover {
-            background-color: #1a2942;
+            background-color: #1e40af;
             color: #ffffff;
         }
 
@@ -195,7 +195,7 @@
             visibility: hidden;
             min-width: 240px;
             background-color: #92E8F1;
-            color: #090d16;
+            color: #1d4ed8;
             text-align: center;
             border-radius: 10px;
             padding: 12px;
@@ -205,7 +205,7 @@
             bottom: 30px;
             transform: translateX(-50%);
             font-weight: bold;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
         }
 
         #toast.show {
@@ -265,14 +265,13 @@
     <div id="toast">Código Pix copiado! 👊</div>
 
     <script>
-        // Payloads Pix oficiais gerados para a chave brunodiasa35@gmail.com com os valores embutidos
         const payloadsPix = {
             '1,00': '00020126580014br.gov.bcb.pix0136brunodiasa35@gmail.com0204000053039865802BR5909BRUNO DIAS6009SAO GONCALO62070503***630489A1',
             '2,00': '00020126580014br.gov.bcb.pix0136brunodiasa35@gmail.com0204000053039865802BR5909BRUNO DIAS6009SAO GONCALO62070503***63046D82',
             '3,00': '00020126580014br.gov.bcb.pix0136brunodiasa35@gmail.com0204000053039865802BR5909BRUNO DIAS6009SAO GONCALO62070503***6304B763',
             '4,00': '00020126580014br.gov.bcb.pix0136brunodiasa35@gmail.com0204000053039865802BR5909BRUNO DIAS6009SAO GONCALO62070503***630424A4',
             '5,00': '00020126580014br.gov.bcb.pix0136brunodiasa35@gmail.com0204000053039865802BR5909BRUNO DIAS6009SAO GONCALO62070503***63049F85',
-            'Outro': 'brunodiasa35@gmail.com' // Se for outro valor, copia apenas o e-mail simples
+            'Outro': 'brunodiasa35@gmail.com'
         };
 
         let codigoAtual = "";
