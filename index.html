@@ -102,7 +102,7 @@
             font-weight: bold;
         }
 
-        input[type="text"] {
+        input[type="text"], input[type="password"] {
             width: 100%;
             padding: 10px;
             border: 1px solid #d1d5db;
@@ -111,7 +111,7 @@
             box-sizing: border-box;
         }
 
-        input[type="text"]:focus {
+        input[type="text"]:focus, input[type="password"]:focus {
             outline: none;
             border-color: var(--primary-color);
             box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
@@ -198,7 +198,7 @@
             <button class="submit-btn" onclick="confirmPurchase()">Confirmar Escolha</button>
         </div>
 
-        <!-- Painel do Organizador -->
+        <!-- Painel do Organizador Protegido -->
         <div class="admin-section">
             <button class="admin-toggle" onclick="toggleAdmin()">Painel do Organizador (Ver Quem Comprou)</button>
             <div class="admin-panel" id="adminPanel">
@@ -212,7 +212,6 @@
     </div>
 
     <script>
-        // Carrega dados salvos ou inicializa estrutura vazia
         let rifaData = JSON.parse(localStorage.getItem('rifaData')) || {};
         let selectedNumber = null;
 
@@ -245,7 +244,6 @@
         }
 
         function selectNumber(num, btnElement) {
-            // Remove seleção anterior
             document.querySelectorAll('.number-btn').forEach(b => {
                 if (!b.classList.contains('sold')) {
                     b.classList.remove('selected');
@@ -272,7 +270,6 @@
 
                 alert(`Número ${selectedNumber} reservado com sucesso para ${name}!`);
                 
-                // Reseta formulário
                 selectedNumber = null;
                 buyerNameInput.value = '';
                 formContainer.style.display = 'none';
@@ -282,7 +279,21 @@
 
         function toggleAdmin() {
             const panel = document.getElementById('adminPanel');
-            panel.style.display = panel.style.display === 'block' ? 'none' : 'block';
+            
+            // Se já estiver aberto, apenas fecha
+            if (panel.style.display === 'block') {
+                panel.style.display = 'none';
+                return;
+            }
+
+            // Senha para abrir o painel (mude '1234' para a senha que quiser)
+            const senhaDigitada = prompt('Digite a senha do organizador:');
+            
+            if (senhaDigitada === '1234') {
+                panel.style.display = 'block';
+            } else if (senhaDigitada !== null) {
+                alert('Senha incorreta!');
+            }
         }
 
         function updateAdminList() {
@@ -311,7 +322,6 @@
             }
         }
 
-        // Inicializa a grade ao carregar
         renderGrid();
     </script>
 </body>
