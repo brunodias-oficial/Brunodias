@@ -301,8 +301,7 @@
                     <strong>💳 Pagamento via PIX (R$ 5,00):</strong>
                     Copie a chave abaixo ou pague e envie o comprovante no WhatsApp.
                     <div class="pix-row">
-                        <!-- Substitua 'SEU_PIX_AQUI' pela sua chave PIX real -->
-                        <span class="pix-key" id="pixKeyText">SEU_PIX_AQUI</span>
+                        <span class="pix-key" id="pixKeyText">brunodiasa35@gmail.com</span>
                         <button class="copy-btn" onclick="copyPix()">Copiar PIX</button>
                     </div>
                 </div>
@@ -392,7 +391,7 @@
                 rifaData[selectedNumber] = name;
                 localStorage.setItem('rifaData', JSON.stringify(rifaData));
 
-                alert(`Número ${selectedNumber} reservado com sucesso para ${name}!\n\nPor favor, envie o comprovante do PIX de R$ 5,00 para confirmar.`);
+                alert(`Número ${selectedNumber} reservado com sucesso para ${name}!\n\nPor favor, envie o comprovante do PIX (brunodiasa35@gmail.com) no valor de R$ 5,00 para confirmar.`);
                 
                 selectedNumber = null;
                 buyerNameInput.value = '';
