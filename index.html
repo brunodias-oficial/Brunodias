@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Apoie o perfil</title>
+    <title>Apoie o perfil - Bruno Dias</title>
     <style>
         * {
             margin: 0;
@@ -102,6 +102,10 @@
             color: #1d4ed8;
             transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(146, 232, 241, 0.4);
+        }
+
+        .btn-value:active {
+            transform: scale(0.97);
         }
 
         .btn-full {
@@ -214,7 +218,7 @@
             text-decoration: underline;
         }
 
-        /* Notificação flutuante */
+        /* Notificação flutuante (Toast) */
         #toast {
             visibility: hidden;
             min-width: 240px;
@@ -286,7 +290,7 @@
                 "Muito obrigado pela ajuda! Sua força faz toda a diferença para o perfil continuar. Tamo junto!"
             </div>
 
-            <a href="https://www.tiktok.com/@brunodias_oficial" target="_blank" class="btn-tiktok">Voltar para o TikTok / Deixar Mensagem</a>
+            <a href="https://www.tiktok.com/@brunodias_oficial" target="_blank" class="btn-tiktok">Voltar para o TikTok e deixe sua Mensagem</a>
             
             <button class="btn-back" onclick="voltarTela()">&#8592; Escolher outro valor</button>
 
@@ -311,28 +315,56 @@
 
         let codigoAtual = "";
 
+        function copiarTextoSeguro(texto, mensagemSucesso) {
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(texto).then(() => {
+                    mostrarToast(mensagemSucesso);
+                }).catch(() => {
+                    fallbackCopiarTexto(texto, mensagemSucesso);
+                });
+            } else {
+                fallbackCopiarTexto(texto, mensagemSucesso);
+            }
+        }
+
+        function fallbackCopiarTexto(texto, mensagemSucesso) {
+            const textArea = document.createElement("textarea");
+            textArea.value = texto;
+            textArea.style.position = "fixed";  // Evita rolagem indesejada
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            try {
+                document.execCommand('copy');
+                mostrarToast(mensagemSucesso);
+            } catch (err) {
+                console.error('Erro ao copiar', err);
+            }
+            document.body.removeChild(textArea);
+        }
+
+        function mostrarToast(mensagem) {
+            const toast = document.getElementById("toast");
+            toast.innerText = mensagem;
+            toast.className = "show";
+            setTimeout(() => { 
+                toast.className = toast.className.replace("show", ""); 
+            }, 3000);
+        }
+
         function escolherValor(valor) {
             codigoAtual = payloadsPix[valor];
             
-            navigator.clipboard.writeText(codigoAtual).then(() => {
-                const toast = document.getElementById("toast");
-                if (valor !== 'Outro') {
-                    toast.innerText = `Pix de R$ ${valor} com valor embutido copiado! 👊`;
-                    document.getElementById("label-pix-box").innerText = "Pix Copia e Cola (com valor) gerado! Clique para copiar:";
-                    document.getElementById("texto-payload").innerText = "Código Pix Copia e Cola gerado com sucesso (Cole no app do banco)";
-                } else {
-                    toast.innerText = "Chave Pix (E-mail) copiada com sucesso! 👊";
-                    document.getElementById("label-pix-box").innerText = "Chave Pix (E-mail):";
-                    document.getElementById("texto-payload").innerText = "brunodiasa35@gmail.com";
-                }
-                toast.className = "show";
-                setTimeout(() => { toast.className = toast.className.replace("show", ""); }, 3000);
-            });
-
             if (valor !== 'Outro') {
+                copiarTextoSeguro(codigoAtual, `Pix de R$ ${valor} com valor embutido copiado! 👊`);
+                document.getElementById("label-pix-box").innerText = "Pix Copia e Cola (com valor) gerado! Clique para copiar:";
+                document.getElementById("texto-payload").innerText = "Código pronto! Cole direto no app do banco.";
                 document.getElementById("titulo-selecao").innerText = `Apoio de R$ ${valor} selecionado!`;
             } else {
-                document.getElementById("titulo-selecao").innerText = `Apoio com valor livre selecionado!`;
+                copiarTextoSeguro(codigoAtual, "Chave Pix (E-mail) copiada com sucesso! 👊");
+                document.getElementById("label-pix-box").innerText = "Chave Pix (E-mail):";
+                document.getElementById("texto-payload").innerText = "brunodiasa35@gmail.com";
+                document.getElementById("titulo-selecao").innerText = "Apoio com valor livre selecionado!";
             }
 
             document.getElementById("step-1").classList.remove("visible");
@@ -351,12 +383,7 @@
         }
 
         function copiarPixAtual() {
-            navigator.clipboard.writeText(codigoAtual).then(() => {
-                const toast = document.getElementById("toast");
-                toast.innerText = "Código Pix copiado novamente! 👊";
-                toast.className = "show";
-                setTimeout(() => { toast.className = toast.className.replace("show", ""); }, 3000);
-            });
+            copiarTextoSeguro(codigoAtual, "Código Pix copiado novamente! 👊");
         }
     </script>
 
