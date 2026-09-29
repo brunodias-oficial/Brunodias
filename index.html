@@ -193,6 +193,43 @@
             color: #1e40af;
         }
 
+        .pix-row {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            margin-top: 6px;
+        }
+
+        .pix-key-display {
+            background: white;
+            padding: 6px 8px;
+            border: 1px solid #93c5fd;
+            border-radius: 4px;
+            font-family: monospace;
+            flex: 1;
+            font-size: 12px;
+            color: #1e3a8a;
+            font-weight: bold;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .copy-pix-btn {
+            background-color: #3b82f6;
+            color: white;
+            border: none;
+            padding: 6px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 11px;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        .copy-pix-btn:hover {
+            background-color: #2563eb;
+        }
+
         .submit-btn {
             background-color: var(--success-color);
             color: white;
@@ -211,21 +248,22 @@
             background-color: #059669;
         }
 
-        .copy-msg-btn {
-            background-color: #3b82f6;
-            color: white;
-            border: none;
+        .tiktok-send-btn {
+            background-color: #010101;
+            color: #25f4ee;
+            border: 1px solid #25f4ee;
             border-radius: 6px;
             padding: 10px;
             width: 100%;
             font-size: 14px;
             font-weight: bold;
             cursor: pointer;
-            transition: background-color 0.2s;
+            transition: all 0.2s;
         }
 
-        .copy-msg-btn:hover {
-            background-color: #2563eb;
+        .tiktok-send-btn:hover {
+            background-color: #111;
+            transform: scale(1.01);
         }
 
         /* Painel Oculto do Organizador */
@@ -315,16 +353,20 @@
                 <label for="buyerName">Seu Nome para os Números Selecionados:</label>
                 <input type="text" id="buyerName" placeholder="Digite seu nome completo">
                 
-                <!-- Caixa de Pagamento PIX com Valores Dinâmicos -->
+                <!-- Caixa de Pagamento PIX com Botão de Copiar Chave -->
                 <div class="payment-box">
-                    <strong>💳 Resumo do Pagamento via PIX:</strong>
+                    <strong>💳 Pagamento via PIX:</strong>
                     Números escolhidos: <span id="selectedNumbersText" style="font-weight: bold; color: #1e40af;">-</span><br>
-                    Valor total a pagar: <strong style="font-size: 14px; color: #047857;" id="totalPriceText">R$ 0,00</strong>
-                    <div style="margin-top: 6px; font-size: 11px; color: #4b5563;">Chave PIX (E-mail): <b>brunodiasa35@gmail.com</b></div>
+                    Valor total: <strong style="font-size: 14px; color: #047857;" id="totalPriceText">R$ 0,00</strong>
+                    
+                    <div class="pix-row">
+                        <div class="pix-key-display" id="pixKeyText">brunodiasa35@gmail.com</div>
+                        <button class="copy-pix-btn" onclick="copyPixKey()">📋 Copiar Chave</button>
+                    </div>
                 </div>
 
-                <button class="submit-btn" onclick="confirmPurchase()">Reservar Números</button>
-                <button class="copy-msg-btn" onclick="copyMessageAndOpen()">📋 Copiar Mensagem para Enviar Comprovante</button>
+                <button class="submit-btn" onclick="confirmPurchase()">1º Reservar Números</button>
+                <button class="tiktok-send-btn" onclick="copyMsgAndOpenTikTok()">🎬 2º Copiar Mensagem e Enviar no TikTok</button>
             </div>
         </div>
 
@@ -397,6 +439,15 @@
             }
         }
 
+        function copyPixKey() {
+            const pixKey = document.getElementById('pixKeyText').innerText;
+            navigator.clipboard.writeText(pixKey).then(() => {
+                alert('✅ Chave PIX copiada com sucesso!');
+            }).catch(err => {
+                alert('Erro ao copiar a chave.');
+            });
+        }
+
         function confirmPurchase() {
             const name = buyerNameInput.value.trim();
             if (!name) {
@@ -415,11 +466,11 @@
             });
 
             localStorage.setItem('rifaData', JSON.stringify(rifaData));
-            alert(`Números salvos com sucesso! Agora clique no botão azul abaixo para copiar a mensagem e enviar o comprovante.`);
+            alert(`✅ Números reservados com sucesso!\n\nAgora copie a mensagem no botão abaixo e envie o comprovante no TikTok.`);
             renderGrid();
         }
 
-        function copyMessageAndOpen() {
+        function copyMsgAndOpenTikTok() {
             const name = buyerNameInput.value.trim();
             if (!name) {
                 alert('Por favor, digite seu nome primeiro.');
@@ -438,7 +489,7 @@
             const textoMensagem = `Olá Bruno! Sou o(a) ${name}. Acabei de reservar os números #${numsStr} da rifa no valor de R$ ${totalVal} e paguei via PIX. Segue o meu comprovante!`;
 
             navigator.clipboard.writeText(textoMensagem).then(() => {
-                alert(`✅ Mensagem copiada com sucesso!\n\nAgora você será direcionado para o TikTok (@brunodias_oficial). Basta colar a mensagem lá junto com o seu comprovante!`);
+                alert(`📋 Mensagem copiada com sucesso!\n\nO TikTok (@brunodias_oficial) vai abrir agora. Basta colar a mensagem lá junto com o comprovante.`);
                 window.open(`https://tiktok.com/@brunodias_oficial`, '_blank');
             }).catch(err => {
                 alert('Erro ao copiar a mensagem.');
