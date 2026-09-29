@@ -193,6 +193,16 @@
             color: #1e40af;
         }
 
+        .payment-box a {
+            color: #ff0050;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .payment-box a:hover {
+            text-decoration: underline;
+        }
+
         .pix-row {
             display: flex;
             align-items: center;
@@ -334,7 +344,7 @@
                 <!-- Caixa de Pagamento PIX -->
                 <div class="payment-box">
                     <strong>💳 Pagamento via PIX (R$ 5,00):</strong>
-                    Copie a chave abaixo ou pague e envie o comprovante no WhatsApp.
+                    Copie a chave abaixo e envie o comprovante no TikTok: <a href="https://tiktok.com/@brunodias_oficial" target="_blank">@brunodias_oficial</a>
                     <div class="pix-row">
                         <span class="pix-key" id="pixKeyText">brunodiasa35@gmail.com</span>
                         <button class="copy-btn" onclick="copyPix()">Copiar PIX</button>
@@ -426,7 +436,7 @@
                 rifaData[selectedNumber] = name;
                 localStorage.setItem('rifaData', JSON.stringify(rifaData));
 
-                alert(`Número ${selectedNumber} reservado com sucesso para ${name}!\n\nPor favor, envie o comprovante do PIX (brunodiasa35@gmail.com) no valor de R$ 5,00 para confirmar.`);
+                alert(`Número ${selectedNumber} reservado com sucesso para ${name}!\n\nPor favor, envie o comprovante do PIX (brunodiasa35@gmail.com) no TikTok (@brunodias_oficial) para confirmar.`);
                 
                 selectedNumber = null;
                 buyerNameInput.value = '';
