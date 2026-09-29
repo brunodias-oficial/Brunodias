@@ -181,6 +181,7 @@
             border-radius: 12px;
             cursor: pointer;
             width: 100%;
+            margin-bottom: 20px;
             transition: all 0.2s;
             text-align: center;
         }
@@ -188,6 +189,29 @@
         .btn-back:hover {
             background-color: #1e40af;
             color: #ffffff;
+        }
+
+        /* Rodapé com link do TikTok */
+        .footer-tiktok {
+            margin-top: 15px;
+            font-size: 0.9rem;
+            color: #cbd5e1;
+            text-align: center;
+            width: 100%;
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+            padding-top: 15px;
+        }
+
+        .footer-tiktok a {
+            color: #92E8F1;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.2s;
+        }
+
+        .footer-tiktok a:hover {
+            color: #ffffff;
+            text-decoration: underline;
         }
 
         /* Notificação flutuante */
@@ -240,6 +264,12 @@
                 <button class="btn-value btn-full" onclick="escolherValor('5,00')">R$ 5,00</button>
                 <button class="btn-value btn-full" onclick="escolherValor('Outro')">Outro valor</button>
             </div>
+
+            <!-- Rodapé TikTok na Tela 1 -->
+            <div class="footer-tiktok">
+                Acompanhe o criador no TikTok: <br>
+                <a href="https://www.tiktok.com/@brunodias_oficial" target="_blank">@brunodias_oficial</a>
+            </div>
         </div>
 
         <!-- TELA 2: Confirmação, Pix e Redes -->
@@ -259,6 +289,11 @@
             <a href="https://www.tiktok.com/@brunodias_oficial" target="_blank" class="btn-tiktok">Voltar para o TikTok / Deixar Mensagem</a>
             
             <button class="btn-back" onclick="voltarTela()">&#8592; Escolher outro valor</button>
+
+            <!-- Rodapé TikTok na Tela 2 -->
+            <div class="footer-tiktok" style="margin-top: 5px;">
+                Visite o perfil: <a href="https://www.tiktok.com/@brunodias_oficial" target="_blank">@brunodias_oficial</a>
+            </div>
         </div>
     </div>
 
