@@ -28,7 +28,7 @@
 
         .container {
             background-color: var(--card-bg);
-            padding: 30px;
+            padding: 25px 30px;
             border-radius: 12px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             max-width: 450px;
@@ -40,7 +40,7 @@
             margin-bottom: 5px;
             color: var(--primary-color);
             font-size: 24px;
-            cursor: pointer; /* Discreto para o admin */
+            cursor: pointer;
             user-select: none;
         }
 
@@ -67,7 +67,7 @@
         }
 
         .price {
-            font-size: 16px;
+            font-size: 15px;
             font-weight: bold;
             color: #059669;
             margin-bottom: 15px;
@@ -97,21 +97,30 @@
             transition: all 0.2s ease;
         }
 
+        .number-btn:hover:not(:disabled) {
+            background-color: #d1d5db;
+        }
+
         .number-btn.selected {
             background-color: var(--primary-color);
             color: white;
+            transform: scale(1.05);
         }
 
         .number-btn.sold {
             background-color: #ef4444;
             color: white;
             cursor: not-allowed;
-            opacity: 0.7;
+            opacity: 0.8;
         }
 
         .form-group {
             margin-bottom: 15px;
             text-align: left;
+            background: #f9fafb;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #e5e7eb;
         }
 
         label {
@@ -119,6 +128,7 @@
             margin-bottom: 5px;
             font-size: 13px;
             font-weight: bold;
+            color: #374151;
         }
 
         input[type="text"] {
@@ -128,12 +138,23 @@
             border-radius: 6px;
             font-size: 14px;
             box-sizing: border-box;
+            margin-bottom: 10px;
         }
 
         input[type="text"]:focus {
             outline: none;
             border-color: var(--primary-color);
             box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+        }
+
+        .payment-hint {
+            font-size: 12px;
+            color: #b45309;
+            background-color: #fef3c7;
+            padding: 8px;
+            border-radius: 4px;
+            margin-bottom: 10px;
+            text-align: center;
         }
 
         .submit-btn {
@@ -143,7 +164,7 @@
             border-radius: 6px;
             padding: 12px;
             width: 100%;
-            font-size: 16px;
+            font-size: 15px;
             font-weight: bold;
             cursor: pointer;
             transition: background-color 0.2s;
@@ -153,14 +174,14 @@
             background-color: #059669;
         }
 
-        /* Painel Oculto por padrão */
+        /* Painel Oculto do Organizador */
         .admin-panel {
             display: none;
             margin-top: 25px;
-            border-top: 1px solid #e5e7eb;
+            border-top: 2px dashed #d1d5db;
             padding-top: 15px;
             text-align: left;
-            background-color: #f9fafb;
+            background-color: #f8fafc;
             padding: 15px;
             border-radius: 8px;
             font-size: 13px;
@@ -168,20 +189,46 @@
 
         .admin-panel ul {
             padding-left: 15px;
-            margin: 5px 0;
-            max-height: 150px;
+            margin: 8px 0;
+            max-height: 140px;
             overflow-y: auto;
+        }
+
+        .admin-buttons {
+            display: flex;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .sortition-btn {
+            background-color: #f59e0b;
+            color: white;
+            border: none;
+            padding: 7px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: bold;
+            flex: 1;
+        }
+
+        .sortition-btn:hover {
+            background-color: #d97706;
         }
 
         .reset-btn {
             background-color: #ef4444;
             color: white;
             border: none;
-            padding: 6px 12px;
+            padding: 7px 12px;
             border-radius: 4px;
             cursor: pointer;
             font-size: 12px;
-            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        .reset-btn:hover {
+            background-color: #dc2626;
         }
     </style>
 </head>
@@ -189,16 +236,15 @@
 
     <div class="container">
         <!-- Dê 3 cliques rápidos neste título para abrir o painel secreto -->
-        <h1 id="mainTitle">Rifa Bruno Dias</h1>
+        <h1 id="mainTitle">Rifa do Bruno Dias</h1>
         
-        <!-- Caixa de Destaque do Prêmio -->
         <div class="prize-box">
             Prêmio: <span class="amount">R$ 50,00</span>
             <div class="details">🔥 10x o valor da rifa!</div>
         </div>
 
         <div class="price">Valor por número: R$ 5,00</div>
-        <p>Clique em um número disponível, digite seu nome e confirme!</p>
+        <p>Escolha um número disponível, digite seu nome e confirme a reserva!</p>
 
         <!-- Grade de Números -->
         <div class="grid" id="numberGrid"></div>
@@ -206,10 +252,11 @@
         <!-- Formulário -->
         <div id="formContainer" style="display: none;">
             <div class="form-group">
-                <label for="buyerName">Nome Completo para o Número <span id="selectedNumberDisplay"></span>:</label>
-                <input type="text" id="buyerName" placeholder="Digite seu nome e sobrenome">
+                <label for="buyerName">Seu Nome para o Número <span id="selectedNumberDisplay" style="color: var(--primary-color);"></span>:</label>
+                <input type="text" id="buyerName" placeholder="Digite seu nome completo">
+                <div class="payment-hint">⚠️ O número só será garantido após o pagamento de R$ 5,00.</div>
+                <button class="submit-btn" onclick="confirmPurchase()">Reservar Número</button>
             </div>
-            <button class="submit-btn" onclick="confirmPurchase()">Confirmar Escolha</button>
         </div>
 
         <!-- Painel do Organizador Oculto -->
@@ -218,7 +265,10 @@
             <ul id="buyersList">
                 <li>Nenhum número vendido ainda.</li>
             </ul>
-            <button class="reset-btn" onclick="resetRaffle()">Zerar Rifa</button>
+            <div class="admin-buttons">
+                <button class="sortition-btn" onclick="drawWinner()">🎲 Sortear Ganhador</button>
+                <button class="reset-btn" onclick="resetRaffle()">Zerar Rifa</button>
+            </div>
         </div>
     </div>
 
@@ -281,7 +331,7 @@
                 rifaData[selectedNumber] = name;
                 localStorage.setItem('rifaData', JSON.stringify(rifaData));
 
-                alert(`Número ${selectedNumber} reservado com sucesso para ${name}!`);
+                alert(`Número ${selectedNumber} reservado com sucesso para ${name}!\n\nLembre-se de enviar o comprovante de R$ 5,00 para o organizador.`);
                 
                 selectedNumber = null;
                 buyerNameInput.value = '';
@@ -292,22 +342,37 @@
 
         function updateAdminList() {
             buyersList.innerHTML = '';
-            const keys = Object.keys(rifaData);
+            const soldNumbers = Object.keys(rifaData);
             
-            if (keys.length === 0) {
+            if (soldNumbers.length === 0) {
                 buyersList.innerHTML = '<li>Nenhum número vendido ainda.</li>';
                 return;
             }
 
-            keys.sort((a, b) => a - b).forEach(num => {
+            soldNumbers.sort((a, b) => a - b).forEach(num => {
                 const li = document.createElement('li');
-                li.innerText = `Número ${num}: ${rifaData[num]}`;
+                li.innerText = `Nº ${num}: ${rifaData[num]}`;
                 buyersList.appendChild(li);
             });
         }
 
+        function drawWinner() {
+            const soldNumbers = Object.keys(rifaData);
+            if (soldNumbers.length === 0) {
+                alert('Ainda não há números vendidos para realizar o sorteio!');
+                return;
+            }
+
+            // Escolhe um número aleatório entre os vendidos
+            const randomIndex = Math.floor(Math.random() * soldNumbers.length);
+            const winningNumber = soldNumbers[randomIndex];
+            const winnerName = rifaData[winningNumber];
+
+            alert(`🎉 PARABÉNS! 🎉\n\nO número sorteado foi o #${winningNumber}\nGanhador(a): ${winnerName}\nPrêmio: R$ 50,00`);
+        }
+
         function resetRaffle() {
-            if (confirm('Tem certeza que deseja apagar todos os dados da rifa?')) {
+            if (confirm('Tem certeza que deseja apagar todos os dados da rifa e começar do zero?')) {
                 rifaData = {};
                 localStorage.removeItem('rifaData');
                 selectedNumber = null;
