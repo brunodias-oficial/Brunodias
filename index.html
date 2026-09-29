@@ -40,15 +40,37 @@
             margin-bottom: 5px;
             color: var(--primary-color);
             font-size: 24px;
-            cursor: pointer; /* Mostra que é interativo discretamente */
+            cursor: pointer; /* Discreto para o admin */
             user-select: none;
         }
 
+        .prize-box {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: white;
+            padding: 12px;
+            border-radius: 8px;
+            margin: 15px 0;
+            font-weight: bold;
+            box-shadow: 0 2px 8px rgba(245, 158, 11, 0.3);
+        }
+
+        .prize-box .amount {
+            font-size: 22px;
+            display: block;
+        }
+
+        .prize-box .details {
+            font-size: 13px;
+            font-weight: normal;
+            opacity: 0.95;
+            margin-top: 2px;
+        }
+
         .price {
-            font-size: 18px;
+            font-size: 16px;
             font-weight: bold;
             color: #059669;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
 
         p {
@@ -166,9 +188,16 @@
 <body>
 
     <div class="container">
-        <!-- Dê 3 cliques rápidos neste título para abrir o painel -->
+        <!-- Dê 3 cliques rápidos neste título para abrir o painel secreto -->
         <h1 id="mainTitle">Rifa Solidária</h1>
-        <div class="price">Valor: R$ 5,00 por número</div>
+        
+        <!-- Caixa de Destaque do Prêmio -->
+        <div class="prize-box">
+            Prêmio: <span class="amount">R$ 50,00</span>
+            <div class="details">🔥 10x o valor da rifa!</div>
+        </div>
+
+        <div class="price">Valor por número: R$ 5,00</div>
         <p>Clique em um número disponível, digite seu nome e confirme!</p>
 
         <!-- Grade de Números -->
@@ -288,12 +317,11 @@
             }
         }
 
-        // Atalho por clique triplo no título (funciona perfeitamente no celular e PC)
+        // Atalho por clique triplo no título
         mainTitle.addEventListener('click', function(event) {
-            // Verifica se deu 3 cliques rápidos
             if (event.detail === 3) {
                 const senha = prompt('Digite a senha de administrador:');
-                if (senha === '1234') { // Senha padrão
+                if (senha === '1234') {
                     adminPanel.style.display = adminPanel.style.display === 'block' ? 'none' : 'block';
                 } else if (senha !== null) {
                     alert('Senha incorreta.');
