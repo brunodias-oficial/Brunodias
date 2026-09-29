@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rifa Online - R$ 5,00</title>
+    <title>Rifa do Bruno Dias - R$ 5,00</title>
     <style>
         :root {
             --primary-color: #4f46e5;
@@ -45,31 +45,31 @@
         }
 
         .prize-box {
-            background: linear-gradient(135deg, #f59e0b, #d97706);
+            background: linear-gradient(135deg, #10b981, #059669);
             color: white;
-            padding: 12px;
+            padding: 14px;
             border-radius: 8px;
             margin: 15px 0;
             font-weight: bold;
-            box-shadow: 0 2px 8px rgba(245, 158, 11, 0.3);
+            box-shadow: 0 3px 10px rgba(16, 185, 129, 0.3);
         }
 
         .prize-box .amount {
-            font-size: 22px;
+            font-size: 24px;
             display: block;
+            margin-top: 2px;
         }
 
         .prize-box .details {
             font-size: 13px;
             font-weight: normal;
             opacity: 0.95;
-            margin-top: 2px;
         }
 
         .price {
             font-size: 15px;
             font-weight: bold;
-            color: #059669;
+            color: #4f46e5;
             margin-bottom: 15px;
         }
 
@@ -147,14 +147,55 @@
             box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
         }
 
-        .payment-hint {
+        .payment-box {
             font-size: 12px;
-            color: #b45309;
-            background-color: #fef3c7;
-            padding: 8px;
+            color: #1e3a8a;
+            background-color: #eff6ff;
+            border: 1px solid #bfdbfe;
+            padding: 10px;
+            border-radius: 6px;
+            margin-bottom: 12px;
+            text-align: left;
+        }
+
+        .payment-box strong {
+            display: block;
+            margin-bottom: 4px;
+            color: #1e40af;
+        }
+
+        .pix-row {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            margin-top: 5px;
+        }
+
+        .pix-key {
+            background: white;
+            padding: 4px 8px;
+            border: 1px solid #93c5fd;
             border-radius: 4px;
-            margin-bottom: 10px;
-            text-align: center;
+            font-family: monospace;
+            flex: 1;
+            font-size: 11px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .copy-btn {
+            background-color: #3b82f6;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 11px;
+            font-weight: bold;
+        }
+
+        .copy-btn:hover {
+            background-color: #2563eb;
         }
 
         .submit-btn {
@@ -239,12 +280,12 @@
         <h1 id="mainTitle">Rifa do Bruno Dias</h1>
         
         <div class="prize-box">
-            Prêmio: <span class="amount">R$ 50,00</span>
-            <div class="details">🔥 10x o valor da rifa!</div>
+            <div class="details">✨ Concorra a um super prêmio em dinheiro! ✨</div>
+            <span class="amount">Prêmio: R$ 50,00</span>
         </div>
 
-        <div class="price">Valor por número: R$ 5,00</div>
-        <p>Escolha um número disponível, digite seu nome e confirme a reserva!</p>
+        <div class="price">Apenas R$ 5,00 por número</div>
+        <p>Escolha um número disponível abaixo, digite seu nome e garanta sua chance!</p>
 
         <!-- Grade de Números -->
         <div class="grid" id="numberGrid"></div>
@@ -254,7 +295,18 @@
             <div class="form-group">
                 <label for="buyerName">Seu Nome para o Número <span id="selectedNumberDisplay" style="color: var(--primary-color);"></span>:</label>
                 <input type="text" id="buyerName" placeholder="Digite seu nome completo">
-                <div class="payment-hint">⚠️ O número só será garantido após o pagamento de R$ 5,00.</div>
+                
+                <!-- Caixa de Pagamento PIX -->
+                <div class="payment-box">
+                    <strong>💳 Pagamento via PIX (R$ 5,00):</strong>
+                    Copie a chave abaixo ou pague e envie o comprovante no WhatsApp.
+                    <div class="pix-row">
+                        <!-- Substitua 'SEU_PIX_AQUI' pela sua chave PIX real -->
+                        <span class="pix-key" id="pixKeyText">SEU_PIX_AQUI</span>
+                        <button class="copy-btn" onclick="copyPix()">Copiar PIX</button>
+                    </div>
+                </div>
+
                 <button class="submit-btn" onclick="confirmPurchase()">Reservar Número</button>
             </div>
         </div>
@@ -320,6 +372,15 @@
             buyerNameInput.focus();
         }
 
+        function copyPix() {
+            const pixKey = document.getElementById('pixKeyText').innerText;
+            navigator.clipboard.writeText(pixKey).then(() => {
+                alert('Chave PIX copiada com sucesso!');
+            }).catch(err => {
+                alert('Erro ao copiar chave.');
+            });
+        }
+
         function confirmPurchase() {
             const name = buyerNameInput.value.trim();
             if (!name) {
@@ -331,7 +392,7 @@
                 rifaData[selectedNumber] = name;
                 localStorage.setItem('rifaData', JSON.stringify(rifaData));
 
-                alert(`Número ${selectedNumber} reservado com sucesso para ${name}!\n\nLembre-se de enviar o comprovante de R$ 5,00 para o organizador.`);
+                alert(`Número ${selectedNumber} reservado com sucesso para ${name}!\n\nPor favor, envie o comprovante do PIX de R$ 5,00 para confirmar.`);
                 
                 selectedNumber = null;
                 buyerNameInput.value = '';
@@ -363,7 +424,6 @@
                 return;
             }
 
-            // Escolhe um número aleatório entre os vendidos
             const randomIndex = Math.floor(Math.random() * soldNumbers.length);
             const winningNumber = soldNumbers[randomIndex];
             const winnerName = rifaData[winningNumber];
