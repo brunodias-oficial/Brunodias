@@ -3,553 +3,154 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rifa do Bruno Dias - R$ 5,00</title>
+    <title>Apoie o perfil</title>
     <style>
-        :root {
-            --primary-color: #4f46e5;
-            --primary-hover: #4338ca;
-            --success-color: #10b981;
-            --bg-color: #f3f4f6;
-            --card-bg: #ffffff;
-            --text-color: #1f2937;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            margin: 0;
-            padding: 20px;
+            background-color: #0f172a;
+            color: #f8fafc;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
+            padding: 20px;
         }
 
         .container {
-            background-color: var(--card-bg);
-            padding: 25px 30px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            max-width: 450px;
+            background-color: #1e293b;
             width: 100%;
+            max-width: 420px;
+            padding: 30px 20px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
             text-align: center;
+            border: 1px solid #334155;
+        }
+
+        .profile-pic {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #38bdf8;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 12px rgba(56, 189, 248, 0.3);
         }
 
         h1 {
-            margin-bottom: 5px;
-            color: var(--primary-color);
-            font-size: 24px;
-            cursor: pointer;
-            user-select: none;
+            font-size: 1.25rem;
+            margin-bottom: 25px;
+            color: #f1f5f9;
+            font-weight: 600;
         }
 
-        .prize-box {
-            background: linear-gradient(135deg, #10b981, #059669);
-            color: white;
-            padding: 14px;
-            border-radius: 8px;
-            margin: 15px 0;
-            font-weight: bold;
-            box-shadow: 0 3px 10px rgba(16, 185, 129, 0.3);
-        }
-
-        .prize-box .amount {
-            font-size: 24px;
-            display: block;
-            margin-top: 2px;
-        }
-
-        .prize-box .details {
-            font-size: 13px;
-            font-weight: normal;
-            opacity: 0.95;
-        }
-
-        .tiktok-box {
-            background: linear-gradient(135deg, #010101, #25f4ee);
-            color: white;
-            padding: 10px 14px;
-            border-radius: 8px;
-            margin: 12px 0;
-            font-size: 13px;
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
-        }
-
-        .tiktok-box a {
-            color: #ff0050;
-            background: white;
-            padding: 3px 8px;
-            border-radius: 4px;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 12px;
-        }
-
-        .tiktok-box a:hover {
-            background: #f1f1f1;
-        }
-
-        .price {
-            font-size: 15px;
-            font-weight: bold;
-            color: #4f46e5;
-            margin-bottom: 15px;
-        }
-
-        p {
-            margin-bottom: 15px;
-            font-size: 14px;
-            color: #4b5563;
-        }
-
-        .grid {
+        .values-grid {
             display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 10px;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
             margin-bottom: 20px;
         }
 
-        .number-btn {
-            background-color: #e5e7eb;
+        .btn-value {
+            background-color: #334155;
+            color: #ffffff;
             border: none;
-            border-radius: 8px;
-            padding: 12px 0;
-            font-size: 16px;
+            padding: 14px;
+            font-size: 1rem;
             font-weight: bold;
+            border-radius: 8px;
             cursor: pointer;
             transition: all 0.2s ease;
+            text-decoration: none;
+            display: block;
         }
 
-        .number-btn:hover:not(:disabled) {
-            background-color: #d1d5db;
+        .btn-value:hover {
+            background-color: #38bdf8;
+            color: #0f172a;
+            transform: translateY(-2px);
         }
 
-        .number-btn.selected {
-            background-color: var(--primary-color);
-            color: white;
-            transform: scale(1.05);
+        .btn-full {
+            grid-column: span 2;
         }
 
-        .number-btn.sold {
-            background-color: #ef4444;
-            color: white;
-            cursor: not-allowed;
-            opacity: 0.8;
-        }
-
-        .form-group {
-            margin-bottom: 15px;
-            text-align: left;
-            background: #f9fafb;
+        .pix-box {
+            background-color: #0f172a;
             padding: 15px;
             border-radius: 8px;
-            border: 1px solid #e5e7eb;
+            margin-bottom: 25px;
+            border: 1px dashed #38bdf8;
         }
 
-        label {
-            display: block;
+        .pix-box p {
+            font-size: 0.85rem;
+            color: #94a3b8;
             margin-bottom: 5px;
-            font-size: 13px;
+        }
+
+        .pix-key {
+            font-size: 0.95rem;
+            color: #38bdf8;
             font-weight: bold;
-            color: #374151;
+            word-break: break-all;
         }
 
-        input[type="text"] {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #d1d5db;
-            border-radius: 6px;
-            font-size: 14px;
-            box-sizing: border-box;
-            margin-bottom: 10px;
+        .social-section {
+            margin-top: 20px;
+            border-top: 1px solid #334155;
+            padding-top: 20px;
         }
 
-        input[type="text"]:focus {
-            outline: none;
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
-        }
-
-        .payment-box {
-            font-size: 12px;
-            color: #1e3a8a;
-            background-color: #eff6ff;
-            border: 1px solid #bfdbfe;
-            padding: 10px;
-            border-radius: 6px;
-            margin-bottom: 12px;
-            text-align: left;
-        }
-
-        .payment-box strong {
-            display: block;
-            margin-bottom: 4px;
-            color: #1e40af;
-        }
-
-        .pix-row {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            margin-top: 6px;
-        }
-
-        .pix-key-display {
-            background: white;
-            padding: 6px 8px;
-            border: 1px solid #93c5fd;
-            border-radius: 4px;
-            font-family: monospace;
-            flex: 1;
-            font-size: 12px;
-            color: #1e3a8a;
+        .btn-tiktok {
+            background-color: #00f2fe;
+            background-image: linear-gradient(45deg, #00f2fe 0%, #4facfe 100%);
+            color: #0f172a;
             font-weight: bold;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .copy-pix-btn {
-            background-color: #3b82f6;
-            color: white;
-            border: none;
-            padding: 6px 10px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 11px;
-            font-weight: bold;
-            white-space: nowrap;
-        }
-
-        .copy-pix-btn:hover {
-            background-color: #2563eb;
-        }
-
-        .submit-btn {
-            background-color: var(--success-color);
-            color: white;
-            border: none;
-            border-radius: 6px;
             padding: 12px;
-            width: 100%;
-            font-size: 15px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background-color 0.2s;
-            margin-bottom: 8px;
-        }
-
-        .submit-btn:hover {
-            background-color: #059669;
-        }
-
-        .tiktok-send-btn {
-            background-color: #010101;
-            color: #25f4ee;
-            border: 1px solid #25f4ee;
-            border-radius: 6px;
-            padding: 10px;
-            width: 100%;
-            font-size: 14px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .tiktok-send-btn:hover {
-            background-color: #111;
-            transform: scale(1.01);
-        }
-
-        /* Painel Oculto do Organizador */
-        .admin-panel {
-            display: none;
-            margin-top: 25px;
-            border-top: 2px dashed #d1d5db;
-            padding-top: 15px;
-            text-align: left;
-            background-color: #f8fafc;
-            padding: 15px;
             border-radius: 8px;
-            font-size: 13px;
+            text-decoration: none;
+            display: block;
+            transition: opacity 0.2s;
         }
 
-        .admin-panel ul {
-            padding-left: 15px;
-            margin: 8px 0;
-            max-height: 140px;
-            overflow-y: auto;
-        }
-
-        .admin-buttons {
-            display: flex;
-            gap: 8px;
-            margin-top: 10px;
-        }
-
-        .sortition-btn {
-            background-color: #f59e0b;
-            color: white;
-            border: none;
-            padding: 7px 12px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 12px;
-            font-weight: bold;
-            flex: 1;
-        }
-
-        .sortition-btn:hover {
-            background-color: #d97706;
-        }
-
-        .reset-btn {
-            background-color: #ef4444;
-            color: white;
-            border: none;
-            padding: 7px 12px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 12px;
-            font-weight: bold;
-        }
-
-        .reset-btn:hover {
-            background-color: #dc2626;
+        .btn-tiktok:hover {
+            opacity: 0.9;
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <!-- Dê 3 cliques rápidos neste título para abrir o painel secreto -->
-        <h1 id="mainTitle">Rifa do Bruno Dias</h1>
+        <!-- Substitua o link abaixo pela URL da sua foto -->
+        <img src="https://via.placeholder.com/100" alt="Bruno Dias" class="profile-pic">
         
-        <div class="prize-box">
-            <div class="details">✨ Concorra a um super prêmio em dinheiro! ✨</div>
-            <span class="amount">Prêmio: R$ 50,00</span>
+        <h1>Apoie o canal para o perfil continuar</h1>
+
+        <div class="values-grid">
+            <button class="btn-value">R$ 1,00</button>
+            <button class="btn-value">R$ 2,00</button>
+            <button class="btn-value">R$ 3,00</button>
+            <button class="btn-value">R$ 4,00</button>
+            <button class="btn-value btn-full">R$ 5,00</button>
+            <button class="btn-value btn-full">Outro valor</button>
         </div>
 
-        <!-- Aviso do Sorteio no TikTok -->
-        <div class="tiktok-box">
-            🎬 Sorteio ao vivo no TikTok: 
-            <a href="https://tiktok.com/@brunodias_oficial" target="_blank">@brunodias_oficial</a>
+        <div class="pix-box">
+            <p>Chave Pix (E-mail):</p>
+            <div class="pix-key">brunodiasa35@gmail.com</div>
         </div>
 
-        <div class="price">Apenas R$ 5,00 por número</div>
-        <p>Escolha um ou mais números disponíveis abaixo, digite seu nome e garanta suas chances!</p>
-
-        <!-- Grade de Números -->
-        <div class="grid" id="numberGrid"></div>
-
-        <!-- Formulário -->
-        <div id="formContainer" style="display: none;">
-            <div class="form-group">
-                <label for="buyerName">Seu Nome para os Números Selecionados:</label>
-                <input type="text" id="buyerName" placeholder="Digite seu nome completo">
-                
-                <!-- Caixa de Pagamento PIX com Botão de Copiar Chave -->
-                <div class="payment-box">
-                    <strong>💳 Pagamento via PIX:</strong>
-                    Números escolhidos: <span id="selectedNumbersText" style="font-weight: bold; color: #1e40af;">-</span><br>
-                    Valor total: <strong style="font-size: 14px; color: #047857;" id="totalPriceText">R$ 0,00</strong>
-                    
-                    <div class="pix-row">
-                        <div class="pix-key-display" id="pixKeyText">brunodiasa35@gmail.com</div>
-                        <button class="copy-pix-btn" onclick="copyPixKey()">📋 Copiar Chave</button>
-                    </div>
-                </div>
-
-                <button class="submit-btn" onclick="confirmPurchase()">Reservar Números</button>
-                <button class="tiktok-send-btn" onclick="copyMsgAndOpenTikTok()">🎬 Enviar Comprovante pelo TikTok</button>
-            </div>
-        </div>
-
-        <!-- Painel do Organizador Oculto -->
-        <div class="admin-panel" id="adminPanel">
-            <strong>🔐 Painel Secreto do Organizador:</strong>
-            <ul id="buyersList">
-                <li>Nenhum número vendido ainda.</li>
-            </ul>
-            <div class="admin-buttons">
-                <button class="sortition-btn" onclick="drawWinner()">🎲 Sortear Ganhador</button>
-                <button class="reset-btn" onclick="resetRaffle()">Zerar Rifa</button>
-            </div>
+        <div class="social-section">
+            <a href="https://www.tiktok.com/@brunodias_oficial" target="_blank" class="btn-tiktok">TikTok: @brunodias_oficial</a>
         </div>
     </div>
 
-    <script>
-        let rifaData = JSON.parse(localStorage.getItem('rifaData')) || {};
-        let selectedNumbers = [];
-
-        const grid = document.getElementById('numberGrid');
-        const formContainer = document.getElementById('formContainer');
-        const selectedNumbersText = document.getElementById('selectedNumbersText');
-        const totalPriceText = document.getElementById('totalPriceText');
-        const buyerNameInput = document.getElementById('buyerName');
-        const buyersList = document.getElementById('buyersList');
-        const adminPanel = document.getElementById('adminPanel');
-        const mainTitle = document.getElementById('mainTitle');
-
-        function renderGrid() {
-            grid.innerHTML = '';
-            for (let i = 1; i <= 20; i++) {
-                const btn = document.createElement('button');
-                btn.className = 'number-btn';
-                btn.innerText = i;
-
-                if (rifaData[i]) {
-                    btn.classList.add('sold');
-                    btn.title = `Vendido para: ${rifaData[i]}`;
-                    btn.disabled = true;
-                } else {
-                    if (selectedNumbers.includes(i)) {
-                        btn.classList.add('selected');
-                    }
-                    btn.onclick = () => toggleNumber(i, btn);
-                }
-                grid.appendChild(btn);
-            }
-            updateAdminList();
-        }
-
-        function toggleNumber(num, btnElement) {
-            const index = selectedNumbers.indexOf(num);
-            if (index > -1) {
-                selectedNumbers.splice(index, 1);
-                btnElement.classList.remove('selected');
-            } else {
-                selectedNumbers.push(num);
-                btnElement.classList.add('selected');
-            }
-
-            selectedNumbers.sort((a, b) => a - b);
-
-            if (selectedNumbers.length > 0) {
-                formContainer.style.display = 'block';
-                selectedNumbersText.innerText = selectedNumbers.map(n => `#${n}`).join(', ');
-                totalPriceText.innerText = `R$ ${(selectedNumbers.length * 5).toFixed(2).replace('.', ',')}`;
-            } else {
-                formContainer.style.display = 'none';
-            }
-        }
-
-        function copyPixKey() {
-            const pixKey = document.getElementById('pixKeyText').innerText;
-            navigator.clipboard.writeText(pixKey).then(() => {
-                alert('✅ Chave PIX copiada com sucesso!');
-            }).catch(err => {
-                alert('Erro ao copiar a chave.');
-            });
-        }
-
-        function confirmPurchase() {
-            const name = buyerNameInput.value.trim();
-            if (!name) {
-                alert('Por favor, digite seu nome.');
-                buyerNameInput.focus();
-                return;
-            }
-
-            if (selectedNumbers.length === 0) {
-                alert('Selecione pelo menos um número.');
-                return;
-            }
-
-            selectedNumbers.forEach(num => {
-                rifaData[num] = name;
-            });
-
-            localStorage.setItem('rifaData', JSON.stringify(rifaData));
-            alert(`✅ Números reservados com sucesso!\n\nAgora copie a mensagem no botão abaixo e envie o comprovante no TikTok.`);
-            renderGrid();
-        }
-
-        function copyMsgAndOpenTikTok() {
-            const name = buyerNameInput.value.trim();
-            if (!name) {
-                alert('Por favor, digite seu nome primeiro.');
-                buyerNameInput.focus();
-                return;
-            }
-
-            if (selectedNumbers.length === 0 && !Object.values(rifaData).includes(name)) {
-                alert('Selecione os números e clique em "Reservar Números" primeiro.');
-                return;
-            }
-
-            const numsStr = selectedNumbers.length > 0 ? selectedNumbers.join(', ') : 'meus números';
-            const totalVal = (selectedNumbers.length * 5).toFixed(2).replace('.', ',');
-
-            const textoMensagem = `Olá Bruno! Sou o(a) ${name}. Acabei de reservar os números #${numsStr} da rifa no valor de R$ ${totalVal} e paguei via PIX. Segue o meu comprovante!`;
-
-            navigator.clipboard.writeText(textoMensagem).then(() => {
-                alert(`📋 Mensagem copiada com sucesso!\n\nO TikTok (@brunodias_oficial) vai abrir agora. Basta colar a mensagem lá junto com o comprovante.`);
-                window.open(`https://tiktok.com/@brunodias_oficial`, '_blank');
-            }).catch(err => {
-                alert('Erro ao copiar a mensagem.');
-            });
-        }
-
-        function updateAdminList() {
-            buyersList.innerHTML = '';
-            const soldNumbers = Object.keys(rifaData);
-            
-            if (soldNumbers.length === 0) {
-                buyersList.innerHTML = '<li>Nenhum número vendido ainda.</li>';
-                return;
-            }
-
-            soldNumbers.sort((a, b) => a - b).forEach(num => {
-                const li = document.createElement('li');
-                li.innerText = `Nº ${num}: ${rifaData[num]}`;
-                buyersList.appendChild(li);
-            });
-        }
-
-        function drawWinner() {
-            const soldNumbers = Object.keys(rifaData);
-            if (soldNumbers.length === 0) {
-                alert('Ainda não há números vendidos para realizar o sorteio!');
-                return;
-            }
-
-            const randomIndex = Math.floor(Math.random() * soldNumbers.length);
-            const winningNumber = soldNumbers[randomIndex];
-            const winnerName = rifaData[winningNumber];
-
-            alert(`🎉 PARABÉNS! 🎉\n\nO número sorteado foi o #${winningNumber}\nGanhador(a): ${winnerName}\nPrêmio: R$ 50,00`);
-        }
-
-        function resetRaffle() {
-            if (confirm('Tem certeza que deseja apagar todos os dados da rifa e começar do zero?')) {
-                rifaData = {};
-                localStorage.removeItem('rifaData');
-                selectedNumbers = [];
-                formContainer.style.display = 'none';
-                renderGrid();
-                adminPanel.style.display = 'none';
-            }
-        }
-
-        // Atalho por clique triplo no título
-        mainTitle.addEventListener('click', function(event) {
-            if (event.detail === 3) {
-                const senha = prompt('Digite a senha de administrador:');
-                if (senha === '0614') {
-                    adminPanel.style.display = adminPanel.style.display === 'block' ? 'none' : 'block';
-                } else if (senha !== null) {
-                    alert('Senha incorreta.');
-                }
-            }
-        });
-
-        renderGrid();
-    </script>
 </body>
 </html>
