@@ -32,7 +32,6 @@
             box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
             text-align: center;
             border: 1px solid #1e293b;
-            position: relative;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -43,25 +42,19 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            position: absolute;
-            top: 35px;
-            left: 25px;
-            right: 25px;
-            width: calc(100% - 50px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
         }
 
         .hidden {
+            display: none;
             opacity: 0;
-            transform: scale(0.95) translateY(15px);
-            pointer-events: none;
-            position: absolute;
+            transform: scale(0.95);
         }
 
         .visible {
+            display: flex;
             opacity: 1;
-            transform: scale(1) translateY(0);
-            position: relative;
+            transform: scale(1);
         }
 
         .profile-pic {
@@ -88,7 +81,6 @@
             grid-template-columns: repeat(2, 1fr);
             gap: 12px;
             width: 100%;
-            margin-bottom: 10px;
         }
 
         .btn-value {
@@ -264,7 +256,7 @@
                 "Muito obrigado pela ajuda! Sua força faz toda a diferença para o perfil continuar. Tamo junto!"
             </div>
 
-            <a href="https://www.tiktok.com/@brunodias_oficial" target="_blank" class="btn-tiktok">Voltar para o TikTok / Deixar Mensagem</a>
+            <a href="https://www.tiktok.com/@brunodias_oficial" target="_blank" class="btn-tiktok">Voltar para o TikTok e deixe sua Mensagem</a>
             
             <button class="btn-back" onclick="voltarTela()">Escolher outro valor</button>
         </div>
