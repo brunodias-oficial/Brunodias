@@ -40,6 +40,8 @@
             margin-bottom: 5px;
             color: var(--primary-color);
             font-size: 24px;
+            cursor: pointer; /* Mostra que é interativo discretamente */
+            user-select: none;
         }
 
         .price {
@@ -164,7 +166,8 @@
 <body>
 
     <div class="container">
-        <h1>Rifa Solidária</h1>
+        <!-- Dê 3 cliques rápidos neste título para abrir o painel -->
+        <h1 id="mainTitle">Rifa Solidária</h1>
         <div class="price">Valor: R$ 5,00 por número</div>
         <p>Clique em um número disponível, digite seu nome e confirme!</p>
 
@@ -200,6 +203,7 @@
         const buyerNameInput = document.getElementById('buyerName');
         const buyersList = document.getElementById('buyersList');
         const adminPanel = document.getElementById('adminPanel');
+        const mainTitle = document.getElementById('mainTitle');
 
         function renderGrid() {
             grid.innerHTML = '';
@@ -284,14 +288,13 @@
             }
         }
 
-        // Atalho Secreto: Pressione as teclas Ctrl + Shift + A para abrir o painel pedindo a senha
-        document.addEventListener('keydown', function(event) {
-            if (event.ctrlKey && event.shiftKey && event.key.toLowerCase() === 'a') {
-                event.preventDefault();
+        // Atalho por clique triplo no título (funciona perfeitamente no celular e PC)
+        mainTitle.addEventListener('click', function(event) {
+            // Verifica se deu 3 cliques rápidos
+            if (event.detail === 3) {
                 const senha = prompt('Digite a senha de administrador:');
-                if (senha === '1234') { // Senha padrão (pode alterar aqui se quiser)
+                if (senha === '1234') { // Senha padrão
                     adminPanel.style.display = adminPanel.style.display === 'block' ? 'none' : 'block';
-                    alert('Painel secreto ativado!');
                 } else if (senha !== null) {
                     alert('Senha incorreta.');
                 }
