@@ -193,16 +193,6 @@
             color: #1e40af;
         }
 
-        .payment-box a {
-            color: #ff0050;
-            font-weight: bold;
-            text-decoration: none;
-        }
-
-        .payment-box a:hover {
-            text-decoration: underline;
-        }
-
         .pix-row {
             display: flex;
             align-items: center;
@@ -346,14 +336,10 @@
                     <strong>💳 Resumo do Pagamento via PIX:</strong>
                     Números escolhidos: <span id="selectedNumbersText" style="font-weight: bold; color: #1e40af;">-</span><br>
                     Valor total a pagar: <strong style="font-size: 14px; color: #047857;" id="totalPriceText">R$ 0,00</strong>
-                    <div style="margin-top: 4px;">Após pagar, envie o comprovante no TikTok: <a href="https://tiktok.com/@brunodias_oficial" target="_blank">@brunodias_oficial</a></div>
-                    <div class="pix-row" style="margin-top: 8px;">
-                        <span class="pix-key" id="pixKeyText">brunodiasa35@gmail.com</span>
-                        <button class="copy-btn" onclick="copyPix()">Copiar PIX</button>
-                    </div>
+                    <div style="margin-top: 6px; font-size: 11px; color: #4b5563;">Após realizar o pagamento via PIX, clique no botão abaixo para enviar o comprovante no TikTok:</div>
                 </div>
 
-                <button class="submit-btn" onclick="confirmPurchase()">Reservar Números</button>
+                <button class="submit-btn" onclick="confirmPurchase()">Reservar Números e Enviar Comprovante</button>
             </div>
         </div>
 
@@ -408,11 +394,9 @@
         function toggleNumber(num, btnElement) {
             const index = selectedNumbers.indexOf(num);
             if (index > -1) {
-                // Remove se já estiver selecionado
                 selectedNumbers.splice(index, 1);
                 btnElement.classList.remove('selected');
             } else {
-                // Adiciona se não estiver
                 selectedNumbers.push(num);
                 btnElement.classList.add('selected');
             }
@@ -441,6 +425,7 @@
             const name = buyerNameInput.value.trim();
             if (!name) {
                 alert('Por favor, digite seu nome.');
+                buyerNameInput.focus();
                 return;
             }
 
@@ -449,15 +434,23 @@
                 return;
             }
 
-            // Salva todos os números selecionados para o comprador
+            // Salva os números selecionados
             selectedNumbers.forEach(num => {
                 rifaData[num] = name;
             });
 
             localStorage.setItem('rifaData', JSON.stringify(rifaData));
 
+            const numsStr = selectedNumbers.join(', ');
             const totalVal = (selectedNumbers.length * 5).toFixed(2).replace('.', ',');
-            alert(`Números (${selectedNumbers.join(', ')}) reservados com sucesso para ${name}!\n\nTotal a pagar: R$ ${totalVal}\nEnvie o comprovante do PIX (brunodiasa35@gmail.com) no TikTok (@brunodias_oficial).`);
+
+            // Mensagem pronta para enviar no TikTok
+            const mensagem = encodeURIComponent(`Olá Bruno! Sou o(a) ${name}. Acabei de reservar os números #${numsStr} da rifa no valor de R$ ${totalVal} e paguei via PIX. Segue o meu comprovante!`);
+            
+            alert(`Números (${numsStr}) reservados com sucesso!\n\nAgora você será direcionado para o TikTok (@brunodias_oficial) para enviar o seu comprovante do PIX (Chave: brunodiasa35@gmail.com).`);
+
+            // Abre o perfil do TikTok para envio
+            window.open(`https://tiktok.com/@brunodias_oficial`, '_blank');
             
             selectedNumbers = [];
             buyerNameInput.value = '';
