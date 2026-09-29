@@ -73,11 +73,6 @@
             transition: all 0.2s ease;
         }
 
-        .number-btn:hover:not(:disabled) {
-            background-color: #d1d5db;
-            transform: scale(1.05);
-        }
-
         .number-btn.selected {
             background-color: var(--primary-color);
             color: white;
@@ -102,7 +97,7 @@
             font-weight: bold;
         }
 
-        input[type="text"], input[type="password"] {
+        input[type="text"] {
             width: 100%;
             padding: 10px;
             border: 1px solid #d1d5db;
@@ -111,7 +106,7 @@
             box-sizing: border-box;
         }
 
-        input[type="text"]:focus, input[type="password"]:focus {
+        input[type="text"]:focus {
             outline: none;
             border-color: var(--primary-color);
             box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
@@ -134,48 +129,35 @@
             background-color: #059669;
         }
 
-        .admin-section {
+        /* Painel Oculto por padrão */
+        .admin-panel {
+            display: none;
             margin-top: 25px;
             border-top: 1px solid #e5e7eb;
             padding-top: 15px;
             text-align: left;
-        }
-
-        .admin-toggle {
-            background: none;
-            border: none;
-            color: #6b7280;
-            cursor: pointer;
-            font-size: 12px;
-            text-decoration: underline;
-            padding: 0;
-        }
-
-        .admin-panel {
-            display: none;
-            margin-top: 10px;
             background-color: #f9fafb;
-            padding: 10px;
-            border-radius: 6px;
-            font-size: 12px;
-            max-height: 150px;
-            overflow-y: auto;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 13px;
         }
 
         .admin-panel ul {
             padding-left: 15px;
             margin: 5px 0;
+            max-height: 150px;
+            overflow-y: auto;
         }
 
         .reset-btn {
             background-color: #ef4444;
             color: white;
             border: none;
-            padding: 5px 10px;
+            padding: 6px 12px;
             border-radius: 4px;
             cursor: pointer;
-            font-size: 11px;
-            margin-top: 5px;
+            font-size: 12px;
+            margin-top: 10px;
         }
     </style>
 </head>
@@ -198,16 +180,13 @@
             <button class="submit-btn" onclick="confirmPurchase()">Confirmar Escolha</button>
         </div>
 
-        <!-- Painel do Organizador Protegido -->
-        <div class="admin-section">
-            <button class="admin-toggle" onclick="toggleAdmin()">Painel do Organizador (Ver Quem Comprou)</button>
-            <div class="admin-panel" id="adminPanel">
-                <strong>Lista de Participantes:</strong>
-                <ul id="buyersList">
-                    <li>Nenhum número vendido ainda.</li>
-                </ul>
-                <button class="reset-btn" onclick="resetRaffle()">Zerar Rifa</button>
-            </div>
+        <!-- Painel do Organizador Oculto -->
+        <div class="admin-panel" id="adminPanel">
+            <strong>🔐 Painel Secreto do Organizador:</strong>
+            <ul id="buyersList">
+                <li>Nenhum número vendido ainda.</li>
+            </ul>
+            <button class="reset-btn" onclick="resetRaffle()">Zerar Rifa</button>
         </div>
     </div>
 
@@ -220,6 +199,7 @@
         const selectedNumberDisplay = document.getElementById('selectedNumberDisplay');
         const buyerNameInput = document.getElementById('buyerName');
         const buyersList = document.getElementById('buyersList');
+        const adminPanel = document.getElementById('adminPanel');
 
         function renderGrid() {
             grid.innerHTML = '';
@@ -277,25 +257,6 @@
             }
         }
 
-        function toggleAdmin() {
-            const panel = document.getElementById('adminPanel');
-            
-            // Se já estiver aberto, apenas fecha
-            if (panel.style.display === 'block') {
-                panel.style.display = 'none';
-                return;
-            }
-
-            // Senha para abrir o painel (mude '1234' para a senha que quiser)
-            const senhaDigitada = prompt('Digite a senha do organizador:');
-            
-            if (senhaDigitada === '1234') {
-                panel.style.display = 'block';
-            } else if (senhaDigitada !== null) {
-                alert('Senha incorreta!');
-            }
-        }
-
         function updateAdminList() {
             buyersList.innerHTML = '';
             const keys = Object.keys(rifaData);
@@ -319,8 +280,23 @@
                 selectedNumber = null;
                 formContainer.style.display = 'none';
                 renderGrid();
+                adminPanel.style.display = 'none';
             }
         }
+
+        // Atalho Secreto: Pressione as teclas Ctrl + Shift + A para abrir o painel pedindo a senha
+        document.addEventListener('keydown', function(event) {
+            if (event.ctrlKey && event.shiftKey && event.key.toLowerCase() === 'a') {
+                event.preventDefault();
+                const senha = prompt('Digite a senha de administrador:');
+                if (senha === '1234') { // Senha padrão (pode alterar aqui se quiser)
+                    adminPanel.style.display = adminPanel.style.display === 'block' ? 'none' : 'block';
+                    alert('Painel secreto ativado!');
+                } else if (senha !== null) {
+                    alert('Senha incorreta.');
+                }
+            }
+        });
 
         renderGrid();
     </script>
