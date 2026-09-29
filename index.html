@@ -20,6 +20,7 @@
             align-items: center;
             min-height: 100vh;
             padding: 20px;
+            overflow-x: hidden;
         }
 
         .container {
@@ -31,11 +32,35 @@
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
             text-align: center;
             border: 1px solid #334155;
+            position: relative;
+            overflow: hidden;
+            min-height: 480px;
+        }
+
+        .step {
+            transition: all 0.4s ease-in-out;
+            position: absolute;
+            top: 30px;
+            left: 20px;
+            right: 20px;
+        }
+
+        .hidden {
+            opacity: 0;
+            transform: translateX(-50px);
+            pointer-events: none;
+            position: absolute;
+        }
+
+        .visible {
+            opacity: 1;
+            transform: translateX(0);
+            position: relative;
         }
 
         .profile-pic {
-            width: 100px;
-            height: 100px;
+            width: 90px;
+            height: 90px;
             border-radius: 50%;
             object-fit: cover;
             border: 3px solid #38bdf8;
@@ -44,8 +69,8 @@
         }
 
         h1 {
-            font-size: 1.25rem;
-            margin-bottom: 25px;
+            font-size: 1.2rem;
+            margin-bottom: 20px;
             color: #f1f5f9;
             font-weight: 600;
         }
@@ -67,8 +92,6 @@
             border-radius: 8px;
             cursor: pointer;
             transition: all 0.2s ease;
-            text-decoration: none;
-            display: block;
         }
 
         .btn-value:hover {
@@ -85,8 +108,14 @@
             background-color: #0f172a;
             padding: 15px;
             border-radius: 8px;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
             border: 1px dashed #38bdf8;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .pix-box:hover {
+            background-color: #172554;
         }
 
         .pix-box p {
@@ -102,10 +131,16 @@
             word-break: break-all;
         }
 
-        .social-section {
-            margin-top: 20px;
-            border-top: 1px solid #334155;
-            padding-top: 20px;
+        .thanks-box {
+            background-color: #0f172a;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border: 1px solid #334155;
+            font-size: 0.9rem;
+            color: #cbd5e1;
+            line-height: 1.4;
+            font-style: italic;
         }
 
         .btn-tiktok {
@@ -117,40 +152,145 @@
             border-radius: 8px;
             text-decoration: none;
             display: block;
+            margin-bottom: 12px;
             transition: opacity 0.2s;
         }
 
         .btn-tiktok:hover {
             opacity: 0.9;
         }
+
+        .btn-back {
+            background-color: transparent;
+            color: #94a3b8;
+            border: 1px solid #475569;
+            padding: 10px;
+            font-size: 0.9rem;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.2s;
+        }
+
+        .btn-back:hover {
+            background-color: #334155;
+            color: #f8fafc;
+        }
+
+        /* Notificação flutuante */
+        #toast {
+            visibility: hidden;
+            min-width: 200px;
+            background-color: #38bdf8;
+            color: #0f172a;
+            text-align: center;
+            border-radius: 8px;
+            padding: 10px;
+            position: fixed;
+            z-index: 10;
+            left: 50%;
+            bottom: 30px;
+            transform: translateX(-50%);
+            font-weight: bold;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+
+        #toast.show {
+            visibility: visible;
+            animation: fadein 0.4s, fadeout 0.4s 2.6s;
+        }
+
+        @keyframes fadein {
+            from {bottom: 0; opacity: 0;}
+            to {bottom: 30px; opacity: 1;}
+        }
+
+        @keyframes fadeout {
+            from {bottom: 30px; opacity: 1;}
+            to {bottom: 0; opacity: 0;}
+        }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <!-- Substitua o link abaixo pela URL da sua foto -->
-        <img src="https://via.placeholder.com/100" alt="Bruno Dias" class="profile-pic">
-        
-        <h1>Apoie o canal para o perfil continuar</h1>
+        <!-- TELA 1: Escolha de Valores -->
+        <div id="step-1" class="step visible">
+            <img src="foto.png" alt="Bruno Dias" class="profile-pic">
+            <h1>Apoie o canal para o perfil continuar</h1>
 
-        <div class="values-grid">
-            <button class="btn-value">R$ 1,00</button>
-            <button class="btn-value">R$ 2,00</button>
-            <button class="btn-value">R$ 3,00</button>
-            <button class="btn-value">R$ 4,00</button>
-            <button class="btn-value btn-full">R$ 5,00</button>
-            <button class="btn-value btn-full">Outro valor</button>
+            <div class="values-grid">
+                <button class="btn-value" onclick="escolherValor('1,00')">R$ 1,00</button>
+                <button class="btn-value" onclick="escolherValor('2,00')">R$ 2,00</button>
+                <button class="btn-value" onclick="escolherValor('3,00')">R$ 3,00</button>
+                <button class="btn-value" onclick="escolherValor('4,00')">R$ 4,00</button>
+                <button class="btn-value btn-full" onclick="escolherValor('5,00')">R$ 5,00</button>
+                <button class="btn-value btn-full" onclick="escolherValor('Outro')">Outro valor</button>
+            </div>
         </div>
 
-        <div class="pix-box">
-            <p>Chave Pix (E-mail):</p>
-            <div class="pix-key">brunodiasa35@gmail.com</div>
-        </div>
+        <!-- TELA 2: Confirmação, Pix e Redes -->
+        <div id="step-2" class="step hidden">
+            <img src="foto.png" alt="Bruno Dias" class="profile-pic">
+            <h1 id="titulo-selecao">Apoio selecionado</h1>
 
-        <div class="social-section">
-            <a href="https://www.tiktok.com/@brunodias_oficial" target="_blank" class="btn-tiktok">TikTok: @brunodias_oficial</a>
+            <div class="pix-box" onclick="copiarPixDireto()">
+                <p>Chave Pix copiada! Clique para copiar novamente:</p>
+                <div class="pix-key">brunodiasa35@gmail.com</div>
+            </div>
+
+            <div class="thanks-box">
+                "Muito obrigado pela ajuda! Sua força faz toda a diferença para o perfil continuar. Tamo junto!"
+            </div>
+
+            <a href="https://www.tiktok.com/@brunodias_oficial" target="_blank" class="btn-tiktok">Voltar para o TikTok / Deixar Mensagem</a>
+            
+            <button class="btn-back" onclick="voltarTela()">Escolher outro valor</button>
         </div>
     </div>
+
+    <div id="toast">Chave Pix copiada! 👊</div>
+
+    <script>
+        function escolherValor(valor) {
+            // Copia o Pix automaticamente
+            const chave = "brunodiasa35@gmail.com";
+            navigator.clipboard.writeText(chave).then(() => {
+                const toast = document.getElementById("toast");
+                toast.innerText = `Pix de R$ ${valor} copiado com sucesso! 👊`;
+                toast.className = "show";
+                setTimeout(() => { toast.className = toast.className.replace("show", ""); }, 3000);
+            });
+
+            // Atualiza o texto do título da tela 2
+            document.getElementById("titulo-selecao").innerText = `Apoio de R$ ${valor} selecionado!`;
+
+            // Faz a animação de transição das telas
+            document.getElementById("step-1").classList.remove("visible");
+            document.getElementById("step-1").classList.add("hidden");
+
+            document.getElementById("step-2").classList.remove("hidden");
+            document.getElementById("step-2").classList.add("visible");
+        }
+
+        function voltarTela() {
+            document.getElementById("step-2").classList.remove("visible");
+            document.getElementById("step-2").classList.add("hidden");
+
+            document.getElementById("step-1").classList.remove("hidden");
+            document.getElementById("step-1").classList.add("visible");
+        }
+
+        function copiarPixDireto() {
+            const chave = "brunodiasa35@gmail.com";
+            navigator.clipboard.writeText(chave).then(() => {
+                const toast = document.getElementById("toast");
+                toast.innerText = "Chave Pix copiada novamente! 👊";
+                toast.className = "show";
+                setTimeout(() => { toast.className = toast.className.replace("show", ""); }, 3000);
+            });
+        }
+    </script>
 
 </body>
 </html>
