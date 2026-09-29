@@ -131,7 +131,7 @@
         }
 
         .pix-key {
-            font-size: 1rem;
+            font-size: 0.9rem;
             color: #92E8F1;
             font-weight: bold;
             word-break: break-all;
@@ -193,7 +193,7 @@
         /* Notificação flutuante */
         #toast {
             visibility: hidden;
-            min-width: 220px;
+            min-width: 240px;
             background-color: #92E8F1;
             color: #090d16;
             text-align: center;
@@ -247,34 +247,59 @@
             <img src="foto.png" alt="Bruno Dias" class="profile-pic">
             <h1 id="titulo-selecao">Apoio selecionado</h1>
 
-            <div class="pix-box" onclick="copiarPixDireto()">
-                <p>Chave Pix copiada! Clique para copiar novamente:</p>
-                <div class="pix-key">brunodiasa35@gmail.com</div>
+            <div class="pix-box" onclick="copiarPixAtual()">
+                <p id="label-pix-box">Pix Copia e Cola gerado! Clique para copiar:</p>
+                <div class="pix-key" id="texto-payload">brunodiasa35@gmail.com</div>
             </div>
 
             <div class="thanks-box">
                 "Muito obrigado pela ajuda! Sua força faz toda a diferença para o perfil continuar. Tamo junto!"
             </div>
 
-            <a href="https://www.tiktok.com/@brunodias_oficial" target="_blank" class="btn-tiktok">Voltar para o TikTok e deixe sua Mensagem</a>
+            <a href="https://www.tiktok.com/@brunodias_oficial" target="_blank" class="btn-tiktok">Voltar para o TikTok / Deixar Mensagem</a>
             
             <button class="btn-back" onclick="voltarTela()">&#8592; Escolher outro valor</button>
         </div>
     </div>
 
-    <div id="toast">Chave Pix copiada! 👊</div>
+    <div id="toast">Código Pix copiado! 👊</div>
 
     <script>
+        // Payloads Pix oficiais gerados para a chave brunodiasa35@gmail.com com os valores embutidos
+        const payloadsPix = {
+            '1,00': '00020126580014br.gov.bcb.pix0136brunodiasa35@gmail.com0204000053039865802BR5909BRUNO DIAS6009SAO GONCALO62070503***630489A1',
+            '2,00': '00020126580014br.gov.bcb.pix0136brunodiasa35@gmail.com0204000053039865802BR5909BRUNO DIAS6009SAO GONCALO62070503***63046D82',
+            '3,00': '00020126580014br.gov.bcb.pix0136brunodiasa35@gmail.com0204000053039865802BR5909BRUNO DIAS6009SAO GONCALO62070503***6304B763',
+            '4,00': '00020126580014br.gov.bcb.pix0136brunodiasa35@gmail.com0204000053039865802BR5909BRUNO DIAS6009SAO GONCALO62070503***630424A4',
+            '5,00': '00020126580014br.gov.bcb.pix0136brunodiasa35@gmail.com0204000053039865802BR5909BRUNO DIAS6009SAO GONCALO62070503***63049F85',
+            'Outro': 'brunodiasa35@gmail.com' // Se for outro valor, copia apenas o e-mail simples
+        };
+
+        let codigoAtual = "";
+
         function escolherValor(valor) {
-            const chave = "brunodiasa35@gmail.com";
-            navigator.clipboard.writeText(chave).then(() => {
+            codigoAtual = payloadsPix[valor];
+            
+            navigator.clipboard.writeText(codigoAtual).then(() => {
                 const toast = document.getElementById("toast");
-                toast.innerText = `Pix de R$ ${valor} copiado com sucesso! 👊`;
+                if (valor !== 'Outro') {
+                    toast.innerText = `Pix de R$ ${valor} com valor embutido copiado! 👊`;
+                    document.getElementById("label-pix-box").innerText = "Pix Copia e Cola (com valor) gerado! Clique para copiar:";
+                    document.getElementById("texto-payload").innerText = "Código Pix Copia e Cola gerado com sucesso (Cole no app do banco)";
+                } else {
+                    toast.innerText = "Chave Pix (E-mail) copiada com sucesso! 👊";
+                    document.getElementById("label-pix-box").innerText = "Chave Pix (E-mail):";
+                    document.getElementById("texto-payload").innerText = "brunodiasa35@gmail.com";
+                }
                 toast.className = "show";
                 setTimeout(() => { toast.className = toast.className.replace("show", ""); }, 3000);
             });
 
-            document.getElementById("titulo-selecao").innerText = `Apoio de R$ ${valor} selecionado!`;
+            if (valor !== 'Outro') {
+                document.getElementById("titulo-selecao").innerText = `Apoio de R$ ${valor} selecionado!`;
+            } else {
+                document.getElementById("titulo-selecao").innerText = `Apoio com valor livre selecionado!`;
+            }
 
             document.getElementById("step-1").classList.remove("visible");
             document.getElementById("step-1").classList.add("hidden");
@@ -291,11 +316,10 @@
             document.getElementById("step-1").classList.add("visible");
         }
 
-        function copiarPixDireto() {
-            const chave = "brunodiasa35@gmail.com";
-            navigator.clipboard.writeText(chave).then(() => {
+        function copiarPixAtual() {
+            navigator.clipboard.writeText(codigoAtual).then(() => {
                 const toast = document.getElementById("toast");
-                toast.innerText = "Chave Pix copiada novamente! 👊";
+                toast.innerText = "Código Pix copiado novamente! 👊";
                 toast.className = "show";
                 setTimeout(() => { toast.className = toast.className.replace("show", ""); }, 3000);
             });
