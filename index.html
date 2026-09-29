@@ -193,40 +193,6 @@
             color: #1e40af;
         }
 
-        .pix-row {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            margin-top: 5px;
-        }
-
-        .pix-key {
-            background: white;
-            padding: 4px 8px;
-            border: 1px solid #93c5fd;
-            border-radius: 4px;
-            font-family: monospace;
-            flex: 1;
-            font-size: 11px;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .copy-btn {
-            background-color: #3b82f6;
-            color: white;
-            border: none;
-            padding: 5px 10px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 11px;
-            font-weight: bold;
-        }
-
-        .copy-btn:hover {
-            background-color: #2563eb;
-        }
-
         .submit-btn {
             background-color: var(--success-color);
             color: white;
@@ -238,10 +204,28 @@
             font-weight: bold;
             cursor: pointer;
             transition: background-color 0.2s;
+            margin-bottom: 8px;
         }
 
         .submit-btn:hover {
             background-color: #059669;
+        }
+
+        .copy-msg-btn {
+            background-color: #3b82f6;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 10px;
+            width: 100%;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .copy-msg-btn:hover {
+            background-color: #2563eb;
         }
 
         /* Painel Oculto do Organizador */
@@ -336,10 +320,11 @@
                     <strong>💳 Resumo do Pagamento via PIX:</strong>
                     Números escolhidos: <span id="selectedNumbersText" style="font-weight: bold; color: #1e40af;">-</span><br>
                     Valor total a pagar: <strong style="font-size: 14px; color: #047857;" id="totalPriceText">R$ 0,00</strong>
-                    <div style="margin-top: 6px; font-size: 11px; color: #4b5563;">Após realizar o pagamento via PIX, clique no botão abaixo para enviar o comprovante no TikTok:</div>
+                    <div style="margin-top: 6px; font-size: 11px; color: #4b5563;">Chave PIX (E-mail): <b>brunodiasa35@gmail.com</b></div>
                 </div>
 
-                <button class="submit-btn" onclick="confirmPurchase()">Reservar Números e Enviar Comprovante</button>
+                <button class="submit-btn" onclick="confirmPurchase()">Reservar Números</button>
+                <button class="copy-msg-btn" onclick="copyMessageAndOpen()">📋 Copiar Mensagem para Enviar Comprovante</button>
             </div>
         </div>
 
@@ -412,15 +397,6 @@
             }
         }
 
-        function copyPix() {
-            const pixKey = document.getElementById('pixKeyText').innerText;
-            navigator.clipboard.writeText(pixKey).then(() => {
-                alert('Chave PIX copiada com sucesso!');
-            }).catch(err => {
-                alert('Erro ao copiar chave.');
-            });
-        }
-
         function confirmPurchase() {
             const name = buyerNameInput.value.trim();
             if (!name) {
@@ -434,28 +410,39 @@
                 return;
             }
 
-            // Salva os números selecionados
             selectedNumbers.forEach(num => {
                 rifaData[num] = name;
             });
 
             localStorage.setItem('rifaData', JSON.stringify(rifaData));
+            alert(`Números salvos com sucesso! Agora clique no botão azul abaixo para copiar a mensagem e enviar o comprovante.`);
+            renderGrid();
+        }
 
-            const numsStr = selectedNumbers.join(', ');
+        function copyMessageAndOpen() {
+            const name = buyerNameInput.value.trim();
+            if (!name) {
+                alert('Por favor, digite seu nome primeiro.');
+                buyerNameInput.focus();
+                return;
+            }
+
+            if (selectedNumbers.length === 0 && !Object.values(rifaData).includes(name)) {
+                alert('Selecione os números e clique em "Reservar Números" primeiro.');
+                return;
+            }
+
+            const numsStr = selectedNumbers.length > 0 ? selectedNumbers.join(', ') : 'meus números';
             const totalVal = (selectedNumbers.length * 5).toFixed(2).replace('.', ',');
 
-            // Mensagem pronta para enviar no TikTok
-            const mensagem = encodeURIComponent(`Olá Bruno! Sou o(a) ${name}. Acabei de reservar os números #${numsStr} da rifa no valor de R$ ${totalVal} e paguei via PIX. Segue o meu comprovante!`);
-            
-            alert(`Números (${numsStr}) reservados com sucesso!\n\nAgora você será direcionado para o TikTok (@brunodias_oficial) para enviar o seu comprovante do PIX (Chave: brunodiasa35@gmail.com).`);
+            const textoMensagem = `Olá Bruno! Sou o(a) ${name}. Acabei de reservar os números #${numsStr} da rifa no valor de R$ ${totalVal} e paguei via PIX. Segue o meu comprovante!`;
 
-            // Abre o perfil do TikTok para envio
-            window.open(`https://tiktok.com/@brunodias_oficial`, '_blank');
-            
-            selectedNumbers = [];
-            buyerNameInput.value = '';
-            formContainer.style.display = 'none';
-            renderGrid();
+            navigator.clipboard.writeText(textoMensagem).then(() => {
+                alert(`✅ Mensagem copiada com sucesso!\n\nAgora você será direcionado para o TikTok (@brunodias_oficial). Basta colar a mensagem lá junto com o seu comprovante!`);
+                window.open(`https://tiktok.com/@brunodias_oficial`, '_blank');
+            }).catch(err => {
+                alert('Erro ao copiar a mensagem.');
+            });
         }
 
         function updateAdminList() {
