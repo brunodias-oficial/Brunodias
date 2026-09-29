@@ -330,7 +330,7 @@
         </div>
 
         <div class="price">Apenas R$ 5,00 por número</div>
-        <p>Escolha um número disponível abaixo, digite seu nome e garanta sua chance!</p>
+        <p>Escolha um ou mais números disponíveis abaixo, digite seu nome e garanta suas chances!</p>
 
         <!-- Grade de Números -->
         <div class="grid" id="numberGrid"></div>
@@ -338,20 +338,22 @@
         <!-- Formulário -->
         <div id="formContainer" style="display: none;">
             <div class="form-group">
-                <label for="buyerName">Seu Nome para o Número <span id="selectedNumberDisplay" style="color: var(--primary-color);"></span>:</label>
+                <label for="buyerName">Seu Nome para os Números Selecionados:</label>
                 <input type="text" id="buyerName" placeholder="Digite seu nome completo">
                 
-                <!-- Caixa de Pagamento PIX -->
+                <!-- Caixa de Pagamento PIX com Valores Dinâmicos -->
                 <div class="payment-box">
-                    <strong>💳 Pagamento via PIX (R$ 5,00):</strong>
-                    Copie a chave abaixo e envie o comprovante no TikTok: <a href="https://tiktok.com/@brunodias_oficial" target="_blank">@brunodias_oficial</a>
-                    <div class="pix-row">
+                    <strong>💳 Resumo do Pagamento via PIX:</strong>
+                    Números escolhidos: <span id="selectedNumbersText" style="font-weight: bold; color: #1e40af;">-</span><br>
+                    Valor total a pagar: <strong style="font-size: 14px; color: #047857;" id="totalPriceText">R$ 0,00</strong>
+                    <div style="margin-top: 4px;">Após pagar, envie o comprovante no TikTok: <a href="https://tiktok.com/@brunodias_oficial" target="_blank">@brunodias_oficial</a></div>
+                    <div class="pix-row" style="margin-top: 8px;">
                         <span class="pix-key" id="pixKeyText">brunodiasa35@gmail.com</span>
                         <button class="copy-btn" onclick="copyPix()">Copiar PIX</button>
                     </div>
                 </div>
 
-                <button class="submit-btn" onclick="confirmPurchase()">Reservar Número</button>
+                <button class="submit-btn" onclick="confirmPurchase()">Reservar Números</button>
             </div>
         </div>
 
@@ -370,11 +372,12 @@
 
     <script>
         let rifaData = JSON.parse(localStorage.getItem('rifaData')) || {};
-        let selectedNumber = null;
+        let selectedNumbers = [];
 
         const grid = document.getElementById('numberGrid');
         const formContainer = document.getElementById('formContainer');
-        const selectedNumberDisplay = document.getElementById('selectedNumberDisplay');
+        const selectedNumbersText = document.getElementById('selectedNumbersText');
+        const totalPriceText = document.getElementById('totalPriceText');
         const buyerNameInput = document.getElementById('buyerName');
         const buyersList = document.getElementById('buyersList');
         const adminPanel = document.getElementById('adminPanel');
@@ -392,28 +395,37 @@
                     btn.title = `Vendido para: ${rifaData[i]}`;
                     btn.disabled = true;
                 } else {
-                    btn.onclick = () => selectNumber(i, btn);
-                    if (selectedNumber === i) {
+                    if (selectedNumbers.includes(i)) {
                         btn.classList.add('selected');
                     }
+                    btn.onclick = () => toggleNumber(i, btn);
                 }
                 grid.appendChild(btn);
             }
             updateAdminList();
         }
 
-        function selectNumber(num, btnElement) {
-            document.querySelectorAll('.number-btn').forEach(b => {
-                if (!b.classList.contains('sold')) {
-                    b.classList.remove('selected');
-                }
-            });
+        function toggleNumber(num, btnElement) {
+            const index = selectedNumbers.indexOf(num);
+            if (index > -1) {
+                // Remove se já estiver selecionado
+                selectedNumbers.splice(index, 1);
+                btnElement.classList.remove('selected');
+            } else {
+                // Adiciona se não estiver
+                selectedNumbers.push(num);
+                btnElement.classList.add('selected');
+            }
 
-            selectedNumber = num;
-            btnElement.classList.add('selected');
-            selectedNumberDisplay.innerText = `#${num}`;
-            formContainer.style.display = 'block';
-            buyerNameInput.focus();
+            selectedNumbers.sort((a, b) => a - b);
+
+            if (selectedNumbers.length > 0) {
+                formContainer.style.display = 'block';
+                selectedNumbersText.innerText = selectedNumbers.map(n => `#${n}`).join(', ');
+                totalPriceText.innerText = `R$ ${(selectedNumbers.length * 5).toFixed(2).replace('.', ',')}`;
+            } else {
+                formContainer.style.display = 'none';
+            }
         }
 
         function copyPix() {
@@ -432,17 +444,25 @@
                 return;
             }
 
-            if (selectedNumber && !rifaData[selectedNumber]) {
-                rifaData[selectedNumber] = name;
-                localStorage.setItem('rifaData', JSON.stringify(rifaData));
-
-                alert(`Número ${selectedNumber} reservado com sucesso para ${name}!\n\nPor favor, envie o comprovante do PIX (brunodiasa35@gmail.com) no TikTok (@brunodias_oficial) para confirmar.`);
-                
-                selectedNumber = null;
-                buyerNameInput.value = '';
-                formContainer.style.display = 'none';
-                renderGrid();
+            if (selectedNumbers.length === 0) {
+                alert('Selecione pelo menos um número.');
+                return;
             }
+
+            // Salva todos os números selecionados para o comprador
+            selectedNumbers.forEach(num => {
+                rifaData[num] = name;
+            });
+
+            localStorage.setItem('rifaData', JSON.stringify(rifaData));
+
+            const totalVal = (selectedNumbers.length * 5).toFixed(2).replace('.', ',');
+            alert(`Números (${selectedNumbers.join(', ')}) reservados com sucesso para ${name}!\n\nTotal a pagar: R$ ${totalVal}\nEnvie o comprovante do PIX (brunodiasa35@gmail.com) no TikTok (@brunodias_oficial).`);
+            
+            selectedNumbers = [];
+            buyerNameInput.value = '';
+            formContainer.style.display = 'none';
+            renderGrid();
         }
 
         function updateAdminList() {
@@ -479,7 +499,7 @@
             if (confirm('Tem certeza que deseja apagar todos os dados da rifa e começar do zero?')) {
                 rifaData = {};
                 localStorage.removeItem('rifaData');
-                selectedNumber = null;
+                selectedNumbers = [];
                 formContainer.style.display = 'none';
                 renderGrid();
                 adminPanel.style.display = 'none';
