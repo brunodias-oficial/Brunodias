@@ -13,7 +13,7 @@
         }
 
         body {
-            background-color: #00b4d2; /* Azul piscina bem lindo no fundo */
+            background-color: #00b4d2; /* Azul piscina de fundo */
             color: #ffffff;
             display: flex;
             justify-content: center;
@@ -24,7 +24,7 @@
         }
 
         .container {
-            background-color: #1d4ed8; /* Azul royal elegante na tela/caixa */
+            background-color: #1d4ed8; /* Azul royal na caixa principal */
             width: 100%;
             max-width: 420px;
             padding: 35px 25px;
@@ -68,7 +68,7 @@
         }
 
         h1 {
-            font-size: 1.25rem;
+            font-size: 1.2rem;
             margin-bottom: 25px;
             color: #ffffff;
             font-weight: 600;
@@ -135,7 +135,7 @@
         }
 
         .pix-key {
-            font-size: 0.9rem;
+            font-size: 1rem;
             color: #92E8F1;
             font-weight: bold;
             word-break: break-all;
@@ -195,7 +195,6 @@
             color: #ffffff;
         }
 
-        /* Rodapé com link do TikTok */
         .footer-tiktok {
             margin-top: 15px;
             font-size: 0.9rem;
@@ -218,7 +217,6 @@
             text-decoration: underline;
         }
 
-        /* Notificação flutuante (Toast) */
         #toast {
             visibility: hidden;
             min-width: 240px;
@@ -269,21 +267,20 @@
                 <button class="btn-value btn-full" onclick="escolherValor('Outro')">Outro valor</button>
             </div>
 
-            <!-- Rodapé TikTok na Tela 1 -->
             <div class="footer-tiktok">
                 Acompanhe o criador no TikTok: <br>
                 <a href="https://www.tiktok.com/@brunodias_oficial" target="_blank">@brunodias_oficial</a>
             </div>
         </div>
 
-        <!-- TELA 2: Confirmação, Pix e Redes -->
+        <!-- TELA 2: Confirmação e Chave Pix por E-mail -->
         <div id="step-2" class="step hidden">
             <img src="foto.png" alt="Bruno Dias" class="profile-pic">
-            <h1 id="titulo-selecao">Apoio selecionado</h1>
+            <h1 id="titulo-selecao">Apoio selecionado!</h1>
 
-            <div class="pix-box" onclick="copiarPixAtual()">
-                <p id="label-pix-box">Pix Copia e Cola gerado! Clique para copiar:</p>
-                <div class="pix-key" id="texto-payload">brunodiasa35@gmail.com</div>
+            <div class="pix-box" onclick="copiarChavePix()">
+                <p>Chave Pix E-mail (Clique para copiar):</p>
+                <div class="pix-key">brunodiasa35@gmail.com</div>
             </div>
 
             <div class="thanks-box">
@@ -294,26 +291,16 @@
             
             <button class="btn-back" onclick="voltarTela()">&#8592; Escolher outro valor</button>
 
-            <!-- Rodapé TikTok na Tela 2 -->
             <div class="footer-tiktok" style="margin-top: 5px;">
                 Visite o perfil: <a href="https://www.tiktok.com/@brunodias_oficial" target="_blank">@brunodias_oficial</a>
             </div>
         </div>
     </div>
 
-    <div id="toast">Código Pix copiado! 👊</div>
+    <div id="toast">Chave Pix copiada! 👊</div>
 
     <script>
-        const payloadsPix = {
-            '1,00': '00020126580014br.gov.bcb.pix0136brunodiasa35@gmail.com0204000053039865802BR5909BRUNO DIAS6009SAO GONCALO62070503***630489A1',
-            '2,00': '00020126580014br.gov.bcb.pix0136brunodiasa35@gmail.com0204000053039865802BR5909BRUNO DIAS6009SAO GONCALO62070503***63046D82',
-            '3,00': '00020126580014br.gov.bcb.pix0136brunodiasa35@gmail.com0204000053039865802BR5909BRUNO DIAS6009SAO GONCALO62070503***6304B763',
-            '4,00': '00020126580014br.gov.bcb.pix0136brunodiasa35@gmail.com0204000053039865802BR5909BRUNO DIAS6009SAO GONCALO62070503***630424A4',
-            '5,00': '00020126580014br.gov.bcb.pix0136brunodiasa35@gmail.com0204000053039865802BR5909BRUNO DIAS6009SAO GONCALO62070503***63049F85',
-            'Outro': 'brunodiasa35@gmail.com'
-        };
-
-        let codigoAtual = "";
+        const chavePix = 'brunodiasa35@gmail.com';
 
         function copiarTextoSeguro(texto, mensagemSucesso) {
             if (navigator.clipboard && navigator.clipboard.writeText) {
@@ -330,7 +317,7 @@
         function fallbackCopiarTexto(texto, mensagemSucesso) {
             const textArea = document.createElement("textarea");
             textArea.value = texto;
-            textArea.style.position = "fixed";  // Evita rolagem indesejada
+            textArea.style.position = "fixed"; 
             document.body.appendChild(textArea);
             textArea.focus();
             textArea.select();
@@ -353,18 +340,12 @@
         }
 
         function escolherValor(valor) {
-            codigoAtual = payloadsPix[valor];
+            copiarTextoSeguro(chavePix, `Chave Pix copiada! Cole no banco e digite R$ ${valor} 👊`);
             
             if (valor !== 'Outro') {
-                copiarTextoSeguro(codigoAtual, `Pix de R$ ${valor} com valor embutido copiado! 👊`);
-                document.getElementById("label-pix-box").innerText = "Pix Copia e Cola (com valor) gerado! Clique para copiar:";
-                document.getElementById("texto-payload").innerText = "Código pronto! Cole direto no app do banco.";
-                document.getElementById("titulo-selecao").innerText = `Apoio de R$ ${valor} selecionado!`;
+                document.getElementById("titulo-selecao").innerText = `Apoio de R$ ${valor} selecionado! Digite o valor no aplicativo do banco.`;
             } else {
-                copiarTextoSeguro(codigoAtual, "Chave Pix (E-mail) copiada com sucesso! 👊");
-                document.getElementById("label-pix-box").innerText = "Chave Pix (E-mail):";
-                document.getElementById("texto-payload").innerText = "brunodiasa35@gmail.com";
-                document.getElementById("titulo-selecao").innerText = "Apoio com valor livre selecionado!";
+                document.getElementById("titulo-selecao").innerText = "Apoio livre selecionado! Digite o valor no aplicativo do banco.";
             }
 
             document.getElementById("step-1").classList.remove("visible");
@@ -382,8 +363,8 @@
             document.getElementById("step-1").classList.add("visible");
         }
 
-        function copiarPixAtual() {
-            copiarTextoSeguro(codigoAtual, "Código Pix copiado novamente! 👊");
+        function copiarChavePix() {
+            copiarTextoSeguro(chavePix, "Chave Pix (E-mail) copiada novamente! 👊");
         }
     </script>
 
